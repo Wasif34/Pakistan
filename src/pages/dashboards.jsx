@@ -39,9 +39,11 @@ import exchangeData from "../data/exchange.json";
 import remittanceData from "../data/remittances.json";
 import interestData from "../data/interest.json";
 import kseData from "../data/kse.json";
+import { useNavigate } from "react-router";
 
 export const Dashboards = () => {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const navigate = useNavigate();
 
   // Get latest data for each metric
   const latestInflation = inflationData[inflationData.length - 1];
@@ -155,7 +157,7 @@ export const Dashboards = () => {
                       className="flex items-center gap-3 w-full px-4 py-2 text-left hover:bg-gray-50 text-gray-700"
                       onClick={() => {
                         localStorage.removeItem("isAuthenticated");
-                        window.location.href = "/login";
+                        navigate("/login");
                       }}
                     >
                       <LogOut className="w-4 h-4" />

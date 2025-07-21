@@ -1,0 +1,218 @@
+[
+  {
+    "month": "July",
+    "sector": "Services",
+    "value": 28.3,
+    "change": 0.8
+  },
+  {
+    "month": "July",
+    "sector": "Industry",
+    "value": 8.7,
+    "change": 1.1
+  },
+  {
+    "month": "July",
+    "sector": "Agriculture",
+    "value": 6.1,
+    "change": -0.5
+  },
+  {
+    "month": "August",
+    "sector": "Services",
+    "value": 28.9,
+    "change": 2.1
+  },
+  {
+    "month": "August",
+    "sector": "Industry",
+    "value": 9.2,
+    "change": 1.7
+  },
+  {
+    "month": "August",
+    "sector": "Agriculture",
+    "value": 6.4,
+    "change": 0.6
+  },
+  {
+    "month": "September",
+    "sector": "Services",
+    "value": 29.3,
+    "change": 1.4
+  },
+  {
+    "month": "September",
+    "sector": "Industry",
+    "value": 9.6,
+    "change": 1.3
+  },
+  {
+    "month": "September",
+    "sector": "Agriculture",
+    "value": 6.0,
+    "change": -0.6
+  },
+  {
+    "month": "October",
+    "sector": "Services",
+    "value": 30.0,
+    "change": 2.4
+  },
+  {
+    "month": "October",
+    "sector": "Industry",
+    "value": 9.9,
+    "change": 0.9
+  },
+  {
+    "month": "October",
+    "sector": "Agriculture",
+    "value": 6.3,
+    "change": 0.5
+  },
+  {
+    "month": "November",
+    "sector": "Services",
+    "value": 30.6,
+    "change": 2.0
+  },
+  {
+    "month": "November",
+    "sector": "Industry",
+    "value": 10.2,
+    "change": 1.1
+  },
+  {
+    "month": "November",
+    "sector": "Agriculture",
+    "value": 6.5,
+    "change": 0.3
+  },
+  {
+    "month": "December",
+    "sector": "Services",
+    "value": 31.0,
+    "change": 1.3
+  },
+  {
+    "month": "December",
+    "sector": "Industry",
+    "value": 10.4,
+    "change": 0.8
+  },
+  {
+    "month": "December",
+    "sector": "Agriculture",
+    "value": 6.6,
+    "change": 0.2
+  },
+  {
+    "month": "January",
+    "sector": "Services",
+    "value": 31.2,
+    "change": 0.6
+  },
+  {
+    "month": "January",
+    "sector": "Industry",
+    "value": 10.3,
+    "change": -0.7
+  },
+  {
+    "month": "January",
+    "sector": "Agriculture",
+    "value": 6.4,
+    "change": -0.3
+  },
+  {
+    "month": "February",
+    "sector": "Services",
+    "value": 31.5,
+    "change": 0.9
+  },
+  {
+    "month": "February",
+    "sector": "Industry",
+    "value": 10.7,
+    "change": 1.5
+  },
+  {
+    "month": "February",
+    "sector": "Agriculture",
+    "value": 6.8,
+    "change": 0.6
+  },
+  {
+    "month": "March",
+    "sector": "Services",
+    "value": 32.0,
+    "change": 1.6
+  },
+  {
+    "month": "March",
+    "sector": "Industry",
+    "value": 11.0,
+    "change": 1.1
+  },
+  {
+    "month": "March",
+    "sector": "Agriculture",
+    "value": 7.0,
+    "change": 0.3
+  },
+  {
+    "month": "April",
+    "sector": "Services",
+    "value": 32.2,
+    "change": 0.6
+  },
+  {
+    "month": "April",
+    "sector": "Industry",
+    "value": 10.8,
+    "change": -0.9
+  },
+  {
+    "month": "April",
+    "sector": "Agriculture",
+    "value": 6.9,
+    "change": -0.1
+  },
+  {
+    "month": "May",
+    "sector": "Services",
+    "value": 32.5,
+    "change": 0.9
+  },
+  {
+    "month": "May",
+    "sector": "Industry",
+    "value": 11.1,
+    "change": 1.3
+  },
+  {
+    "month": "May",
+    "sector": "Agriculture",
+    "value": 7.1,
+    "change": 0.3
+  },
+  {
+    "month": "June",
+    "sector": "Services",
+    "value": 33.0,
+    "change": 1.5
+  },
+  {
+    "month": "June",
+    "sector": "Industry",
+    "value": 11.4,
+    "change": 1.0
+  },
+  {
+    "month": "June",
+    "sector": "Agriculture",
+    "value": 7.3,
+    "change": 0.2
+  }
+]

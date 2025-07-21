@@ -1,0 +1,229 @@
+[
+  {
+    "month": "July",
+    "sector": "Agriculture",
+    "growth_rate": 2.5,
+    "change_vs_last_month": null
+  },
+  {
+    "month": "July",
+    "sector": "Industry",
+    "growth_rate": 3.8,
+    "change_vs_last_month": null
+  },
+  {
+    "month": "July",
+    "sector": "Services",
+    "growth_rate": 4.1,
+    "change_vs_last_month": null
+  },
+
+  {
+    "month": "August",
+    "sector": "Agriculture",
+    "growth_rate": 2.6,
+    "change_vs_last_month": 0.1
+  },
+  {
+    "month": "August",
+    "sector": "Industry",
+    "growth_rate": 3.9,
+    "change_vs_last_month": 0.1
+  },
+  {
+    "month": "August",
+    "sector": "Services",
+    "growth_rate": 4.2,
+    "change_vs_last_month": 0.1
+  },
+
+  {
+    "month": "September",
+    "sector": "Agriculture",
+    "growth_rate": 2.7,
+    "change_vs_last_month": 0.1
+  },
+  {
+    "month": "September",
+    "sector": "Industry",
+    "growth_rate": 4.0,
+    "change_vs_last_month": 0.1
+  },
+  {
+    "month": "September",
+    "sector": "Services",
+    "growth_rate": 4.3,
+    "change_vs_last_month": 0.1
+  },
+
+  {
+    "month": "October",
+    "sector": "Agriculture",
+    "growth_rate": 2.9,
+    "change_vs_last_month": 0.2
+  },
+  {
+    "month": "October",
+    "sector": "Industry",
+    "growth_rate": 4.1,
+    "change_vs_last_month": 0.1
+  },
+  {
+    "month": "October",
+    "sector": "Services",
+    "growth_rate": 4.5,
+    "change_vs_last_month": 0.2
+  },
+
+  {
+    "month": "November",
+    "sector": "Agriculture",
+    "growth_rate": 3.0,
+    "change_vs_last_month": 0.1
+  },
+  {
+    "month": "November",
+    "sector": "Industry",
+    "growth_rate": 4.2,
+    "change_vs_last_month": 0.1
+  },
+  {
+    "month": "November",
+    "sector": "Services",
+    "growth_rate": 4.6,
+    "change_vs_last_month": 0.1
+  },
+
+  {
+    "month": "December",
+    "sector": "Agriculture",
+    "growth_rate": 3.2,
+    "change_vs_last_month": 0.2
+  },
+  {
+    "month": "December",
+    "sector": "Industry",
+    "growth_rate": 4.4,
+    "change_vs_last_month": 0.2
+  },
+  {
+    "month": "December",
+    "sector": "Services",
+    "growth_rate": 4.8,
+    "change_vs_last_month": 0.2
+  },
+
+  {
+    "month": "January",
+    "sector": "Agriculture",
+    "growth_rate": 3.3,
+    "change_vs_last_month": 0.1
+  },
+  {
+    "month": "January",
+    "sector": "Industry",
+    "growth_rate": 4.5,
+    "change_vs_last_month": 0.1
+  },
+  {
+    "month": "January",
+    "sector": "Services",
+    "growth_rate": 5.0,
+    "change_vs_last_month": 0.2
+  },
+
+  {
+    "month": "February",
+    "sector": "Agriculture",
+    "growth_rate": 3.4,
+    "change_vs_last_month": 0.1
+  },
+  {
+    "month": "February",
+    "sector": "Industry",
+    "growth_rate": 4.6,
+    "change_vs_last_month": 0.1
+  },
+  {
+    "month": "February",
+    "sector": "Services",
+    "growth_rate": 5.1,
+    "change_vs_last_month": 0.1
+  },
+
+  {
+    "month": "March",
+    "sector": "Agriculture",
+    "growth_rate": 3.5,
+    "change_vs_last_month": 0.1
+  },
+  {
+    "month": "March",
+    "sector": "Industry",
+    "growth_rate": 4.7,
+    "change_vs_last_month": 0.1
+  },
+  {
+    "month": "March",
+    "sector": "Services",
+    "growth_rate": 5.2,
+    "change_vs_last_month": 0.1
+  },
+
+  {
+    "month": "April",
+    "sector": "Agriculture",
+    "growth_rate": 3.6,
+    "change_vs_last_month": 0.1
+  },
+  {
+    "month": "April",
+    "sector": "Industry",
+    "growth_rate": 4.8,
+    "change_vs_last_month": 0.1
+  },
+  {
+    "month": "April",
+    "sector": "Services",
+    "growth_rate": 5.3,
+    "change_vs_last_month": 0.1
+  },
+
+  {
+    "month": "May",
+    "sector": "Agriculture",
+    "growth_rate": 3.7,
+    "change_vs_last_month": 0.1
+  },
+  {
+    "month": "May",
+    "sector": "Industry",
+    "growth_rate": 4.9,
+    "change_vs_last_month": 0.1
+  },
+  {
+    "month": "May",
+    "sector": "Services",
+    "growth_rate": 5.4,
+    "change_vs_last_month": 0.1
+  },
+
+  {
+    "month": "June",
+    "sector": "Agriculture",
+    "growth_rate": 3.8,
+    "change_vs_last_month": 0.1
+  },
+  {
+    "month": "June",
+    "sector": "Industry",
+    "growth_rate": 5.0,
+    "change_vs_last_month": 0.1
+  },
+  {
+    "month": "June",
+    "sector": "Services",
+    "growth_rate": 5.5,
+    "change_vs_last_month": 0.1
+  }
+]

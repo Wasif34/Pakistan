@@ -1,0 +1,74 @@
+[
+  {
+    "month": "July",
+    "rate": 20.5,
+    "change": 0.0,
+    "unit": "Percent"
+  },
+  {
+    "month": "August",
+    "rate": 20.5,
+    "change": 0.0,
+    "unit": "Percent"
+  },
+  {
+    "month": "September",
+    "rate": 20.25,
+    "change": -0.25,
+    "unit": "Percent"
+  },
+  {
+    "month": "October",
+    "rate": 20.0,
+    "change": -0.25,
+    "unit": "Percent"
+  },
+  {
+    "month": "November",
+    "rate": 19.75,
+    "change": -0.25,
+    "unit": "Percent"
+  },
+  {
+    "month": "December",
+    "rate": 19.5,
+    "change": -0.25,
+    "unit": "Percent"
+  },
+  {
+    "month": "January",
+    "rate": 19.0,
+    "change": -0.5,
+    "unit": "Percent"
+  },
+  {
+    "month": "February",
+    "rate": 18.75,
+    "change": -0.25,
+    "unit": "Percent"
+  },
+  {
+    "month": "March",
+    "rate": 18.5,
+    "change": -0.25,
+    "unit": "Percent"
+  },
+  {
+    "month": "April",
+    "rate": 18.25,
+    "change": -0.25,
+    "unit": "Percent"
+  },
+  {
+    "month": "May",
+    "rate": 18.0,
+    "change": -0.25,
+    "unit": "Percent"
+  },
+  {
+    "month": "June",
+    "rate": 17.75,
+    "change": -0.25,
+    "unit": "Percent"
+  }
+]

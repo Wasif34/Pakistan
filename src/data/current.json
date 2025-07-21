@@ -1,0 +1,77 @@
+[
+  {
+    "month": "July",
+    "balance": -2.4,
+    "change": -0.6,
+    "status": "deficit",
+    "note": "High energy import bill"
+  },
+  {
+    "month": "August",
+    "balance": -1.9,
+    "change": 0.5,
+    "status": "deficit"
+  },
+  {
+    "month": "September",
+    "balance": -1.7,
+    "change": 0.2,
+    "status": "deficit"
+  },
+  {
+    "month": "October",
+    "balance": -1.1,
+    "change": 0.6,
+    "status": "deficit"
+  },
+  {
+    "month": "November",
+    "balance": -0.6,
+    "change": 0.5,
+    "status": "deficit",
+    "note": "Increased remittances from Gulf countries"
+  },
+  {
+    "month": "December",
+    "balance": 0.3,
+    "change": 0.9,
+    "status": "surplus"
+  },
+  {
+    "month": "January",
+    "balance": 1.1,
+    "change": 0.8,
+    "status": "surplus"
+  },
+  {
+    "month": "February",
+    "balance": 0.9,
+    "change": -0.2,
+    "status": "surplus"
+  },
+  {
+    "month": "March",
+    "balance": 0.5,
+    "change": -0.4,
+    "status": "surplus"
+  },
+  {
+    "month": "April",
+    "balance": -0.3,
+    "change": -0.8,
+    "status": "deficit"
+  },
+  {
+    "month": "May",
+    "balance": 0.2,
+    "change": 0.5,
+    "status": "surplus"
+  },
+  {
+    "month": "June",
+    "balance": 1.8,
+    "change": 1.6,
+    "status": "surplus",
+    "note": "Record month for textile exports"
+  }
+]

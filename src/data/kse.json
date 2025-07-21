@@ -1,0 +1,14 @@
+[
+  { "month": "July", "index": 45200, "change": 1.5 },
+  { "month": "August", "index": 46800, "change": 3.5 },
+  { "month": "September", "index": 45500, "change": -2.8 },
+  { "month": "October", "index": 46150, "change": 1.4 },
+  { "month": "November", "index": 47000, "change": 1.8 },
+  { "month": "December", "index": 47850, "change": 1.8 },
+  { "month": "January", "index": 46900, "change": -2.0 },
+  { "month": "February", "index": 46000, "change": -1.9 },
+  { "month": "March", "index": 47500, "change": 3.3 },
+  { "month": "April", "index": 48000, "change": 1.1 },
+  { "month": "May", "index": 49200, "change": 2.5 },
+  { "month": "June", "index": 50500, "change": 2.6 }
+]

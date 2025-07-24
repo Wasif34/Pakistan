@@ -41,6 +41,16 @@ import interestData from "../data/interest.json";
 import kseData from "../data/kse.json";
 import { useNavigate } from "react-router";
 
+function remittanceUnitCalculator(amount) {
+  if (amount >= 1e9) {
+    return `${(amount / 1e9).toFixed(2)} B`;
+  } else if (amount >= 1e6) {
+    return `${(amount / 1e6).toFixed(2)} M`;
+  } else if (amount >= 1e3) {
+    return `${(amount / 1e3).toFixed(2)} K`;
+  }
+  return amount.toString();
+}
 export const Dashboards = () => {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const navigate = useNavigate();
@@ -55,7 +65,16 @@ export const Dashboards = () => {
   const latestInterest = interestData[interestData.length - 1];
   const latestKSE = kseData[kseData.length - 1];
 
-  // Calculate overall GDP growth (average of all sectors for latest month)
+  // Calculate overall GDP growth (average of all sectors for latest month);
+
+  let totalRemittance = remittanceData.reduce(
+    (sum, item) => sum + item.amount,
+    0
+  );
+
+  totalRemittance = remittanceUnitCalculator(totalRemittance);
+
+  console.log("Total Remittance:", totalRemittance);
   const latestGDPData = gdpGrowthData.filter((item) => item.month === "June");
   const avgGDPGrowth =
     latestGDPData.reduce((sum, item) => sum + item.growth_rate, 0) /
@@ -324,9 +343,7 @@ export const Dashboards = () => {
                 </div>
               )}
             </div>
-            <div className="text-3xl font-bold text-gray-800 mb-2">
-              {latestRemittance.amount}%
-            </div>
+            <div className="text-3xl font-bold text-gray-800 mb-2">$32B</div>
             <div
               className={`text-sm font-medium ${
                 latestRemittance.change >= 0 ? "text-red-600" : "text-green-600"

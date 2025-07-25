@@ -191,6 +191,7 @@ export const Dashboards = () => {
       </div>
 
       <div className="p-6">
+
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div>
@@ -212,6 +213,7 @@ export const Dashboards = () => {
             </button>
           </div>
         </div>
+
         {/* KPI Cards Row 1 */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <div className="group bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
@@ -323,6 +325,7 @@ export const Dashboards = () => {
               Labor force statistics
             </div>
           </div>
+
           <div className="group bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
@@ -357,6 +360,7 @@ export const Dashboards = () => {
             </div>
           </div>
         </div>
+
         {/* KPI Cards Row 2 */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <div className="group bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
@@ -468,6 +472,7 @@ export const Dashboards = () => {
             </div>
             <div className="text-xs text-gray-500 mt-1">USD-PKR exchange</div>
           </div>
+
           <div className="group bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
@@ -504,6 +509,7 @@ export const Dashboards = () => {
             </div>
           </div>
         </div>
+
         {/* Charts and Notifications Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {/* KPI Charts Section */}
@@ -730,6 +736,7 @@ export const Dashboards = () => {
             </ResponsiveContainer>
           </div>
         </div>
+
         {/* Bottom Charts Row */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Trade Balance Chart */}
@@ -807,6 +814,7 @@ export const Dashboards = () => {
             </ResponsiveContainer>
           </div>
         </div>
+
       </div>
     </div>
   );

@@ -1,0 +1,86 @@
+[
+  {
+    "month": "July",
+    "value": 4.16,
+    "unit": "Billion USD",
+    "year": 2024,
+    "type": "import"
+  },
+  {
+    "month": "August",
+    "value": 4.31,
+    "unit": "Billion USD",
+    "year": 2024,
+    "type": "import"
+  },
+  {
+    "month": "September",
+    "value": 4.48,
+    "unit": "Billion USD",
+    "year": 2024,
+    "type": "import"
+  },
+  {
+    "month": "October",
+    "value": 4.35,
+    "unit": "Billion USD",
+    "year": 2024,
+    "type": "import"
+  },
+  {
+    "month": "November",
+    "value": 4.31,
+    "unit": "Billion USD",
+    "year": 2024,
+    "type": "import"
+  },
+  {
+    "month": "December",
+    "value": 5.19,
+    "unit": "Billion USD",
+    "year": 2024,
+    "type": "import"
+  },
+  {
+    "month": "January",
+    "value": 5.13,
+    "unit": "Billion USD",
+    "year": 2025,
+    "type": "import"
+  },
+  {
+    "month": "February",
+    "value": 4.64,
+    "unit": "Billion USD",
+    "year": 2025,
+    "type": "import"
+  },
+  {
+    "month": "March",
+    "value": 4.64,
+    "unit": "Billion USD",
+    "year": 2025,
+    "type": "import"
+  },
+  {
+    "month": "April",
+    "value": 5.42,
+    "unit": "Billion USD",
+    "year": 2025,
+    "type": "import"
+  },
+  {
+    "month": "May",
+    "value": 5.11,
+    "unit": "Billion USD",
+    "year": 2025,
+    "type": "import"
+  },
+  {
+    "month": "June",
+    "value": 4.77,
+    "unit": "Billion USD",
+    "year": 2025,
+    "type": "import"
+  }
+]

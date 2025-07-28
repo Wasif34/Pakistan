@@ -1,0 +1,63 @@
+[
+  {
+    "month": "July",
+    "totalReserves": 9.22,
+    "unit": "Billion USD"
+  },
+  {
+    "month": "August",
+    "totalReserves": 9.43,
+    "unit": "Billion USD"
+  },
+  {
+    "month": "September",
+    "totalReserves": 10.73,
+    "unit": "Billion USD"
+  },
+  {
+    "month": "October",
+    "totalReserves": 11.2,
+    "unit": "Billion USD"
+  },
+  {
+    "month": "November",
+    "totalReserves": 12.03,
+    "unit": "Billion USD"
+  },
+  {
+    "month": "December",
+    "totalReserves": 11.73,
+    "unit": "Billion USD"
+  },
+  {
+    "month": "January",
+    "totalReserves": 11.41,
+    "unit": "Billion USD"
+  },
+  {
+    "month": "February",
+    "totalReserves": 11.24,
+    "unit": "Billion USD"
+  },
+  {
+    "month": "March",
+    "totalReserves": 10.63,
+    "unit": "Billion USD"
+  },
+  {
+    "month": "April",
+    "totalReserves": 10.27,
+    "unit": "Billion USD"
+  },
+  {
+    "month": "May",
+    "totalReserves": 11.51,
+    "unit": "Billion USD"
+  },
+  {
+    "month": "June",
+    "totalReserves": 14.5,
+    "change": 3,
+    "unit": "Billion USD"
+  }
+]

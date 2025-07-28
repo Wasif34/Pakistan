@@ -1,0 +1,63 @@
+[
+  {
+    "month": "July",
+    "value": 11.1,
+    "year": 2024
+  },
+  {
+    "month": "August",
+    "value": 9.6,
+    "year": 2024
+  },
+  {
+    "month": "September",
+    "value": 6.9,
+    "year": 2024
+  },
+  {
+    "month": "October",
+    "value": 7.2,
+    "year": 2024
+  },
+  {
+    "month": "November",
+    "value": 4.9,
+    "year": 2024
+  },
+  {
+    "month": "December",
+    "value": 4.1,
+    "year": 2024
+  },
+  {
+    "month": "January",
+    "value": 2.4,
+    "year": 2025
+  },
+  {
+    "month": "February",
+    "value": 1.5,
+    "year": 2025
+  },
+  {
+    "month": "March",
+    "value": 0.7,
+    "year": 2025
+  },
+  {
+    "month": "April",
+    "value": 0.3,
+    "year": 2025
+  },
+  {
+    "month": "May",
+    "value": 3.5,
+    "year": 2025
+  },
+  {
+    "month": "June",
+    "value": 3.2,
+    "year": 2025,
+    "change": -0.3
+  }
+]

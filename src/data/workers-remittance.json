@@ -1,0 +1,63 @@
+[
+  {
+    "month": "July",
+    "amount": 2.99,
+    "unit": "Billion USD"
+  },
+  {
+    "month": "August",
+    "amount": 2.94,
+    "unit": "Billion USD"
+  },
+  {
+    "month": "September",
+    "amount": 2.85,
+    "unit": "Billion USD"
+  },
+  {
+    "month": "October",
+    "amount": 3.05,
+    "unit": "Billion USD"
+  },
+  {
+    "month": "November",
+    "amount": 2.92,
+    "unit": "Billion USD"
+  },
+  {
+    "month": "December",
+    "amount": 3.08,
+    "unit": "Billion USD"
+  },
+  {
+    "month": "January",
+    "amount": 3.00,
+    "unit": "Billion USD"
+  },
+  {
+    "month": "February",
+    "amount": 3.12,
+    "unit": "Billion USD"
+  },
+  {
+    "month": "March",
+    "amount": 4.06,
+    "unit": "Billion USD"
+  },
+  {
+    "month": "April",
+    "amount": 3.18,
+    "unit": "Billion USD"
+  },
+  {
+    "month": "May",
+    "amount": 3.69,
+    "unit": "Billion USD"
+  },
+  {
+    "month": "June",
+    "amount": 3.41,
+    "unit": "Billion USD",
+    "change": -0.28
+  }
+]

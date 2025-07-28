@@ -39,6 +39,21 @@ import exchangeData from "../data/exchange.json";
 import remittanceData from "../data/remittances.json";
 import interestData from "../data/interest.json";
 import kseData from "../data/kse.json";
+
+// new
+import exportGoods from "../data/exportGoods.json"
+import importGoods from "../data/importGoods.json"
+import exportServices from "../data/exportServices.json"
+import importServices from "../data/importServices.json"
+import gdpGrowthQuarterly from "../data/gdp-growth-quarterly.json"
+import inflationRateData from "../data/inflation-rate-new.json"
+import unemploymentDataNew from "../data/unemployment-2024.json"
+import workersRemittance from "../data/workers-remittance.json"
+import currentData from "../data/current-new.json"
+import foreignReserveData from "../data/foreign-reserves.json"
+import interestDataNew from "../data/interest-new.json"
+import currencyData from "../data/currency.json"
+
 import { useNavigate } from "react-router";
 
 function remittanceUnitCalculator(amount) {
@@ -51,18 +66,21 @@ function remittanceUnitCalculator(amount) {
   }
   return amount.toString();
 }
+
 export const Dashboards = () => {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const navigate = useNavigate();
 
   // Get latest data for each metric
-  const latestInflation = inflationData[inflationData.length - 1];
-  const latestUnemployment = unemploymentData[unemploymentData.length - 1];
+  const latestInflation = inflationRateData[inflationData.length - 1];
+  // const latestUnemployment = unemploymentData[unemploymentData.length - 1];
+  const latestUnemployment = unemploymentDataNew[unemploymentDataNew.length - 1];
+
   const latestCurrentAccount =
-    currentAccountData[currentAccountData.length - 1];
-  const latestExchange = exchangeData[exchangeData.length - 1];
-  const latestRemittance = remittanceData[remittanceData.length - 1];
-  const latestInterest = interestData[interestData.length - 1];
+    currentData[currentData.length - 1];
+  const latestExchange = foreignReserveData[foreignReserveData.length - 1];
+  const latestRemittance = workersRemittance[workersRemittance.length - 1];
+  const latestInterest = interestDataNew[interestData.length - 1];
   const latestKSE = kseData[kseData.length - 1];
 
   // Calculate overall GDP growth (average of all sectors for latest month);
@@ -73,21 +91,27 @@ export const Dashboards = () => {
   );
 
   totalRemittance = remittanceUnitCalculator(totalRemittance);
+  
+  const latestGDPDataOld = gdpGrowthData.filter((item) => item.month === "June");
+  
+  const latestGDPData = gdpGrowthQuarterly.filter((item) => item.year === 2025);
 
-  console.log("Total Remittance:", totalRemittance);
-  const latestGDPData = gdpGrowthData.filter((item) => item.month === "June");
   const avgGDPGrowth =
     latestGDPData.reduce((sum, item) => sum + item.growth_rate, 0) /
     latestGDPData.length;
+
+  // const avgGDPChange =
+  //   latestGDPData.reduce(
+  //     (sum, item) => sum + (item.change_vs_last_month || 0),
+  //     0
+  //   ) / latestGDPData.length;
   const avgGDPChange =
     latestGDPData.reduce(
-      (sum, item) => sum + (item.change_vs_last_month || 0),
+      (sum, item) => sum + (item.change_vs_last_quarter || 0),
       0
     ) / latestGDPData.length;
 
-  // Exchange rate (mock data since not in provided JSON)
-  const exchangeRate = 287.5;
-  const exchangeRateChange = -0.8;
+  const exchangeRate = currencyData[currencyData.length - 1];
 
   // Prepare chart data
   const monthOrder = [
@@ -128,7 +152,7 @@ export const Dashboards = () => {
     { sector: "Technology", exports: 15, imports: 25 },
   ];
 
-  const gdpBySectorData = latestGDPData.map((item) => ({
+  const gdpBySectorData = latestGDPDataOld.map((item) => ({
     name: item.sector,
     value: item.growth_rate,
     percentage: (((item.growth_rate / avgGDPGrowth) * 100) / 3).toFixed(1),
@@ -239,6 +263,9 @@ export const Dashboards = () => {
             <div className="text-3xl font-bold text-gray-800 mb-2">
               {avgGDPGrowth.toFixed(1)}%
             </div>
+            <div className="text-sm font-medium mb-1">
+              June - 2025
+            </div>
             <div
               className={`text-sm font-medium ${
                 avgGDPChange >= 0 ? "text-green-600" : "text-red-600"
@@ -274,6 +301,9 @@ export const Dashboards = () => {
             </div>
             <div className="text-3xl font-bold text-gray-800 mb-2">
               {latestInflation.value}%
+            </div>
+            <div className="text-sm font-medium mb-1">
+              {latestInflation.month} - {latestInflation.year}
             </div>
             <div
               className={`text-sm font-medium ${
@@ -311,6 +341,9 @@ export const Dashboards = () => {
             <div className="text-3xl font-bold text-gray-800 mb-2">
               {latestUnemployment.value}%
             </div>
+            <div className="text-sm font-medium mb-1">
+              FY - {latestUnemployment.year}
+            </div>
             <div
               className={`text-sm font-medium ${
                 latestUnemployment.change >= 0
@@ -319,7 +352,7 @@ export const Dashboards = () => {
               }`}
             >
               {latestUnemployment.change >= 0 ? "+" : ""}
-              {latestUnemployment.change}% vs last month
+              {latestUnemployment.change}% vs last year
             </div>
             <div className="text-xs text-gray-500 mt-1">
               Labor force statistics
@@ -346,7 +379,11 @@ export const Dashboards = () => {
                 </div>
               )}
             </div>
-            <div className="text-3xl font-bold text-gray-800 mb-2">$32B</div>
+            <div className="text-3xl font-bold text-gray-800 mb-2">$38.29B</div>
+            <div className="text-sm font-medium mb-1">
+              June - 2025
+            </div>
+
             <div
               className={`text-sm font-medium ${
                 latestRemittance.change >= 0 ? "text-red-600" : "text-green-600"
@@ -384,19 +421,12 @@ export const Dashboards = () => {
               )}
             </div>
             <div className="text-3xl font-bold text-gray-800 mb-2">
-              {latestCurrentAccount.balance >= 0 ? "+" : ""}
-              {latestCurrentAccount.balance}
+              {latestCurrentAccount.value >= 0 ? "+" : ""}
+              {latestCurrentAccount.value}
               <span className="text-lg">B USD</span>
             </div>
-            <div
-              className={`text-sm font-medium ${
-                latestCurrentAccount.change >= 0
-                  ? "text-green-600"
-                  : "text-red-600"
-              }`}
-            >
-              {latestCurrentAccount.change >= 0 ? "+" : ""}
-              {latestCurrentAccount.change}B vs last month
+            <div className="text-sm font-medium mb-1">
+              FY - 2025
             </div>
             <div className="text-xs text-gray-500 mt-1">
               Balance of payments
@@ -427,6 +457,9 @@ export const Dashboards = () => {
               {latestExchange.totalReserves}
               <span className="text-lg">B USD</span>
             </div>
+            <div className="text-sm font-medium mb-1">
+              June - 2025
+            </div>
             <div
               className={`text-sm font-medium ${
                 latestExchange.change >= 0 ? "text-green-600" : "text-red-600"
@@ -448,7 +481,7 @@ export const Dashboards = () => {
                   Exchange Rate
                 </span>
               </div>
-              {exchangeRateChange >= 0 ? (
+              {exchangeRate.change >= 0 ? (
                 <div className="p-1 bg-red-100 rounded-full">
                   <TrendingUp className="w-4 h-4 text-red-600" />
                 </div>
@@ -459,16 +492,19 @@ export const Dashboards = () => {
               )}
             </div>
             <div className="text-3xl font-bold text-gray-800 mb-2">
-              {exchangeRate}
+              {exchangeRate.USDtoPKR}
               <span className="text-lg">PKR/USD</span>
+            </div>
+            <div className="text-sm font-medium mb-1">
+              {exchangeRate.date}
             </div>
             <div
               className={`text-sm font-medium ${
-                exchangeRateChange >= 0 ? "text-red-600" : "text-green-600"
+                exchangeRate.change > 0 ? "text-red-600" : "text-green-600"
               }`}
             >
-              {exchangeRateChange >= 0 ? "+" : ""}
-              {exchangeRateChange}% vs last month
+              {exchangeRate.change > 0 ? "+" : ""}
+              {exchangeRate.change}% vs 2025-07-27 
             </div>
             <div className="text-xs text-gray-500 mt-1">USD-PKR exchange</div>
           </div>
@@ -496,12 +532,15 @@ export const Dashboards = () => {
             <div className="text-3xl font-bold text-gray-800 mb-2">
               {latestInterest.rate}%
             </div>
+            <div className="text-sm font-medium mb-1">
+              June - 2025
+            </div>
             <div
               className={`text-sm font-medium ${
                 latestInterest.change >= 0 ? "text-red-600" : "text-green-600"
               }`}
             >
-              {latestInterest.change >= 0 ? "+" : ""}
+              {latestInterest.change > 0 ? "+" : ""}
               {latestInterest.change}% vs last month
             </div>
             <div className="text-xs text-gray-500 mt-1">
@@ -509,6 +548,91 @@ export const Dashboards = () => {
             </div>
           </div>
         </div>
+
+        {/* KPI Cards Row 3 */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+          {/* Export Goods */}
+          <div className="group bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <div className="p-3 bg-green-100 rounded-lg group-hover:bg-green-200 transition-colors">
+                  <Download className="w-6 h-6 text-green-600" />
+                </div>
+                <span className="text-sm font-semibold text-gray-700">
+                  Export of Goods
+                </span>
+              </div>
+            </div>
+            <div className="text-3xl font-bold text-gray-800 mb-2">
+              ${exportGoods.reduce((acc, curr) => acc + curr.value, 0).toLocaleString()}B
+            </div>
+            <div className="text-sm font-medium text-gray-600">
+              FY 2024-25
+            </div>
+          </div>
+
+          {/* Import Goods */}
+          <div className="group bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <div className="p-3 bg-red-100 rounded-lg group-hover:bg-red-200 transition-colors">
+                  <Download className="w-6 h-6 text-red-600 rotate-180" />
+                </div>
+                <span className="text-sm font-semibold text-gray-700">
+                  Import of Goods
+                </span>
+              </div>
+            </div>
+            <div className="text-3xl font-bold text-gray-800 mb-2">
+              ${importGoods.reduce((acc, curr) => acc + curr.value, 0).toLocaleString()}B
+            </div>
+            <div className="text-sm font-medium text-gray-600">
+              FY 2024-25
+            </div>
+          </div>
+
+          {/* Export Services */}
+          <div className="group bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <div className="p-3 bg-blue-100 rounded-lg group-hover:bg-blue-200 transition-colors">
+                  <Download className="w-6 h-6 text-blue-600" />
+                </div>
+                <span className="text-sm font-semibold text-gray-700">
+                  Export of Services
+                </span>
+              </div>
+            </div>
+            <div className="text-3xl font-bold text-gray-800 mb-2">
+              ${(exportServices.reduce((acc, curr) => acc + curr.value, 0)/1000).toFixed(2)}B
+            </div>
+            <div className="text-sm font-medium text-gray-600">
+              FY 2024-25
+            </div>
+          </div>
+
+          {/* Import Services */}
+          <div className="group bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <div className="p-3 bg-purple-100 rounded-lg group-hover:bg-purple-200 transition-colors">
+                  <Download className="w-6 h-6 text-purple-600 rotate-180" />
+                </div>
+                <span className="text-sm font-semibold text-gray-700">
+                  Import of Services
+                </span>
+              </div>
+            </div>
+            <div className="text-3xl font-bold text-gray-800 mb-2">
+              ${(importServices.reduce((acc, curr) => acc + curr.value, 0)/1000).toFixed(2)}B
+            </div>
+            <div className="text-sm font-medium text-gray-600">
+              FY 2024-25
+            </div>
+          </div>
+        </div>
+
+
 
         {/* Charts and Notifications Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
@@ -824,7 +948,7 @@ function KseIndexAreaChart({ kseIndexData }) {
   return (
     <div className="bg-white p-4 rounded-xl shadow-md w-full">
       <h2 className="text-lg font-semibold mb-4">
-        KSE-100 Index Trend (FY 2024–25)
+        KSE-100 Index Trend (FY 2024-25)
       </h2>
       <ResponsiveContainer width="100%" height={300}>
         <AreaChart

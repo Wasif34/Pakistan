@@ -232,7 +232,7 @@ export const Dashboards = () => {
                 <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border z-50">
                   <div className="p-4 border-b">
                     <div className="font-semibold text-gray-800">Admin</div>
-                    <div className="text-sm text-gray-500">admin@gmail.com</div>
+                    <div className="text-sm text-gray-500">adminacruxtek@yopmail.com</div>
                   </div>
                   <div className="py-2">
                     <button className="flex items-center gap-3 w-full px-4 py-2 text-left hover:bg-gray-50 text-gray-700">

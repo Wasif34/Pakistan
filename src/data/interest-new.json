@@ -1,60 +1,60 @@
 [
   {
-    "month": "July",
+    "month": "Jul",
     "rate": 19.5,
     "unit": "Percent",
     "year": 2024
   },
   {
-    "month": "August",
+    "month": "Aug",
     "rate": 19.5,
     "unit": "Percent",
     "year": 2024
   },
   {
-    "month": "September",
+    "month": "Sep",
     "rate": 17.5,
     "unit": "Percent",
     "year": 2024
   },
   {
-    "month": "October",
+    "month": "Oct",
     "rate": 16,
     "unit": "Percent",
     "year": 2024
   },
   {
-    "month": "November",
+    "month": "Nov",
     "rate": 15,
     "unit": "Percent",
     "year": 2024
   },
   {
-    "month": "December",
+    "month": "Dec",
     "rate": 13,
     "unit": "Percent",
     "year": 2024
   },
   {
-    "month": "January",
+    "month": "Jan",
     "rate": 12,
     "unit": "Percent",
     "year": 2025
   },
   {
-    "month": "February",
+    "month": "Feb",
     "rate": 12,
     "unit": "Percent",
     "year": 2025
   },
   {
-    "month": "March",
+    "month": "Mar",
     "rate": 12,
     "unit": "Percent",
     "year": 2025
   },
   {
-    "month": "April",
+    "month": "Apr",
     "rate": 12,
     "unit": "Percent",
     "year": 2025
@@ -66,7 +66,7 @@
     "year": 2025
   },
   {
-    "month": "June",
+    "month": "Jun",
     "rate": 11,
     "unit": "Percent",
     "year": 2025,

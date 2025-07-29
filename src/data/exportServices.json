@@ -1,69 +1,69 @@
 [
   {
-    "month": "July",
+    "month": "Jul",
     "value": 630.38,
     "unit": "Million USD",
     "year": 2024,
     "type": "export"
   },
   {
-    "month": "August",
+    "month": "Aug",
     "value": 619.84,
     "unit": "Million USD",
     "year": 2024,
     "type": "export"
   },
   {
-    "month": "September",
+    "month": "Sep",
     "value": 660.75,
     "unit": "Million USD",
     "year": 2024,
     "type": "export"
   },
   {
-    "month": "October",
+    "month": "Oct",
     "value": 687.79,
     "unit": "Million USD",
     "year": 2024,
     "type": "export"
   },
   {
-    "month": "November",
+    "month": "Nov",
     "value": 665.8,
     "unit": "Million USD",
     "year": 2024,
     "type": "export"
   },
   {
-    "month": "December",
+    "month": "Dec",
     "value": 792.17,
     "unit": "Million USD",
     "year": 2024,
     "type": "export"
   },
   {
-    "month": "January",
+    "month": "Jan",
     "value": 692.62,
     "unit": "Million USD",
     "year": 2025,
     "type": "export"
   },
   {
-    "month": "February",
+    "month": "Feb",
     "value": 713.77,
     "unit": "Million USD",
     "year": 2025,
     "type": "export"
   },
   {
-    "month": "March",
+    "month": "Mar",
     "value": 725.23,
     "unit": "Million USD",
     "year": 2025,
     "type": "export"
   },
   {
-    "month": "April",
+    "month": "Apr",
     "value": 715.84,
     "unit": "Million USD",
     "year": 2025,
@@ -77,7 +77,7 @@
     "type": "export"
   },
   {
-    "month": "June",
+    "month": "Jun",
     "value": 726.68,
     "unit": "Million USD",
     "year": 2025,

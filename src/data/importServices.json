@@ -1,69 +1,69 @@
 [
   {
-    "month": "July",
+    "month": "Jul",
     "value": 875.77,
     "unit": "Million USD",
     "year": 2024,
     "type": "import"
   },
   {
-    "month": "August",
+    "month": "Aug",
     "value": 978.19,
     "unit": "Million USD",
     "year": 2024,
     "type": "import"
   },
   {
-    "month": "September",
+    "month": "Sept",
     "value": 965.19,
     "unit": "Million USD",
     "year": 2024,
     "type": "import"
   },
   {
-    "month": "October",
+    "month": "Oct",
     "value": 953.16,
     "unit": "Million USD",
     "year": 2024,
     "type": "import"
   },
   {
-    "month": "November",
+    "month": "Nov",
     "value": 866,
     "unit": "Million USD",
     "year": 2024,
     "type": "import"
   },
   {
-    "month": "December",
+    "month": "Dec",
     "value": 1034.07,
     "unit": "Million USD",
     "year": 2024,
     "type": "import"
   },
   {
-    "month": "January",
+    "month": "Jan",
     "value": 1024.06,
     "unit": "Million USD",
     "year": 2025,
     "type": "import"
   },
   {
-    "month": "February",
+    "month": "Feb",
     "value": 973.12,
     "unit": "Million USD",
     "year": 2025,
     "type": "import"
   },
   {
-    "month": "March",
+    "month": "Mar",
     "value": 943.88,
     "unit": "Million USD",
     "year": 2025,
     "type": "import"
   },
   {
-    "month": "April",
+    "month": "Apr",
     "value": 902.65,
     "unit": "Million USD",
     "year": 2025,
@@ -77,7 +77,7 @@
     "type": "import"
   },
   {
-    "month": "June",
+    "month": "Jun",
     "value": 851.56,
     "unit": "Million USD",
     "year": 2025,

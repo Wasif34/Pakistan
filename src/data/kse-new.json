@@ -1,0 +1,44 @@
+[
+  {
+    "date": "2025-01-28",
+    "close": 113600,
+    "month": "January",
+    "change": null
+  },
+  {
+    "date": "2025-02-28",
+    "close": 119000,
+    "month": "February",
+    "change": 4.75
+  },
+  {
+    "date": "2025-03-28",
+    "close": 125000,
+    "month": "March",
+    "change": 5.04
+  },
+  {
+    "date": "2025-04-28",
+    "close": 130000,
+    "month": "April",
+    "change": 4.00
+  },
+  {
+    "date": "2025-05-28",
+    "close": 135000,
+    "month": "May",
+    "change": 3.85
+  },
+  {
+    "date": "2025-06-28",
+    "close": 139000,
+    "month": "June",
+    "change": 2.96
+  },
+  {
+    "date": "2025-07-28",
+    "close": 139207.3,
+    "month": "July",
+    "change": 0.15
+  }
+]

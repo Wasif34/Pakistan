@@ -28,6 +28,7 @@ import {
   Pie,
   AreaChart,
   Area,
+  ReferenceArea,
   ReferenceLine,
 } from "recharts";
 
@@ -53,10 +54,12 @@ import workersRemittance from "../data/workers-remittance.json"
 import currentData from "../data/current-new.json"
 import foreignReserveData from "../data/foreign-reserves.json"
 import interestDataNew from "../data/interest-new.json"
-import currencyData from "../data/currency.json"
+// import currencyData from "../data/currency.json"
+import currencyData from "../data/currency-historical.json";
 import kseDataNew from "../data/kse-new.json";
 
 import { useNavigate } from "react-router";
+import { ExchangeRateChart } from "./ExchangeRateChart";
 
 function remittanceUnitCalculator(amount) {
   if (amount >= 1e9) {
@@ -107,7 +110,6 @@ export const Dashboards = () => {
   const navigate = useNavigate();
 
   const gdpGrowthQuarterlyWithChange = addPercentageChange(gdpGrowthQuarterly, "growth_rate_percent");
-  console.log("gdpGrowthQuarterlyWithChange", gdpGrowthQuarterlyWithChange);
   const inflationWithChange = addPercentageChange(inflationRateData, "value");
   const unemployeData = addPercentageChange(unemploymentDataNew, "value");
   const workRemitances = addPercentageChange(workersRemittance, "amount");
@@ -129,23 +131,25 @@ export const Dashboards = () => {
   
   const latestInterest = interestRate[interestData.length - 1];
   
-  const latestKSE = kseData[kseData.length - 1];
+  // const latestKSE = kseData[kseData.length - 1];
 
-  let totalRemittance = remittanceData.reduce(
-    (sum, item) => sum + item.amount,
-    0
-  );
+  // let totalRemittance = remittanceData.reduce(
+  //   (sum, item) => sum + item.amount,
+  //   0
+  // );
 
-  totalRemittance = remittanceUnitCalculator(totalRemittance);
+  // totalRemittance = remittanceUnitCalculator(totalRemittance);
 
   const avgGDPGrowth =
     latestGDPData.reduce((sum, item) => sum + item.growth_rate_percent, 0) /
     latestGDPData.length;
 
-  const exchangeRate = rateExchangeData[currencyData.length - 1];
+  const exchangeRate = rateExchangeData[0];
+  console.log("Exchange Rate Data:", exchangeRate);
 
   // Prepare chart data
   // --- GDP Growth Quarterly Chart Data ---
+
   const gdpQuarterlyChartData = gdpGrowthQuarterly
     .map((item) => ({
       label: `${item.year} ${item.quarter}`,
@@ -190,19 +194,19 @@ export const Dashboards = () => {
     setModalOpen(true);
   };
 
-  const currencyDataFormatted = currencyData.map(item => {
-    const dateObj = new Date(item.date);
-    // Format as "22/07"
-    const day = String(dateObj.getDate()).padStart(2, '0');
-    const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-    // Format as "22 Jul"
-    const monthShort = dateObj.toLocaleString('en-US', { month: 'short' });
-    return {
-      ...item,
-      dateShort: `${day}/${month}`,      // for "22/07"
-      dateShortText: `${day} ${monthShort}` // for "22 Jul"
-    };
-  });
+  // const currencyDataFormatted = currencyData.map(item => {
+  //   const dateObj = new Date(item.date);
+  //   // Format as "22/07"
+  //   const day = String(dateObj.getDate()).padStart(2, '0');
+  //   const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+  //   // Format as "22 Jul"
+  //   const monthShort = dateObj.toLocaleString('en-US', { month: 'short' });
+  //   return {
+  //     ...item,
+  //     dateShort: `${day}/${month}`,      // for "22/07"
+  //     dateShortText: `${day} ${monthShort}` // for "22 Jul"
+  //   };
+  // });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
@@ -704,32 +708,33 @@ export const Dashboards = () => {
             className="group bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
             onClick={() =>
               openModal(
-                "Exchange Rate Trend",
-                <ResponsiveContainer width="100%" height={350}>
-                  <LineChart data={currencyDataFormatted} margin={{ top: 20, right: 20, bottom: 30, left: 30 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis
-                      dataKey="dateShort"
-                      stroke="#666"
-                      label={{ value: "Date", position: "insideBottom", offset: -15 }}
-                    />
-                    <YAxis
-                      stroke="#666"
-                      label={{ value: "PKR/USD", angle: -90, position: "insideLeft", offset: -15, style: { textAnchor: "middle" } }}
-                      domain={['dataMin - 1', 'dataMax + 1']}
-                      tickCount={6}
-                    />
-                    <Tooltip />
-                    <Line
-                      type="monotone"
-                      dataKey="USDtoPKR"
-                      stroke="#a855f7"
-                      strokeWidth={3}
-                      dot={{ fill: "#a855f7", strokeWidth: 2, r: 5 }}
-                      activeDot={{ r: 7, fill: "#7c3aed" }}
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
+                "USD to PKR Exchange Rate Trend",
+                // <ResponsiveContainer width="100%" height={350}>
+                //   <LineChart data={currencyDataFormatted} margin={{ top: 20, right: 20, bottom: 30, left: 30 }}>
+                //     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                //     <XAxis
+                //       dataKey="dateShort"
+                //       stroke="#666"
+                //       label={{ value: "Date", position: "insideBottom", offset: -15 }}
+                //     />
+                //     <YAxis
+                //       stroke="#666"
+                //       label={{ value: "PKR/USD", angle: -90, position: "insideLeft", offset: -15, style: { textAnchor: "middle" } }}
+                //       domain={['dataMin - 1', 'dataMax + 1']}
+                //       tickCount={6}
+                //     />
+                //     <Tooltip />
+                //     <Line
+                //       type="monotone"
+                //       dataKey="USDtoPKR"
+                //       stroke="#a855f7"
+                //       strokeWidth={3}
+                //       dot={{ fill: "#a855f7", strokeWidth: 2, r: 5 }}
+                //       activeDot={{ r: 7, fill: "#7c3aed" }}
+                //     />
+                //   </LineChart>
+                // </ResponsiveContainer>
+                <ExchangeRateChart />
               )
             }
           >
@@ -739,7 +744,7 @@ export const Dashboards = () => {
                   <DollarSign className="w-6 h-6 text-purple-600" />
                 </div>
                 <span className="text-sm font-semibold text-gray-700">
-                  Exchange Rate
+                  Exchange Rate (USD to PKR)
                 </span>
               </div>
               {exchangeRate.change >= 0 ? (
@@ -753,19 +758,23 @@ export const Dashboards = () => {
               )}
             </div>
             <div className="text-3xl font-bold text-gray-800 mb-2">
-              {exchangeRate.USDtoPKR}
+              {exchangeRate.USDtoPKR.toFixed(2)}
               <span className="text-lg">PKR/USD</span>
             </div>
             <div className="text-sm font-medium mb-1">
               {exchangeRate.date}
             </div>
-            <div
+            {/* <div
               className={`text-sm font-medium ${
                 exchangeRate.change > 0 ? "text-red-600" : "text-green-600"
               }`}
             >
               {exchangeRate.change > 0 ? "+" : ""}
-              {exchangeRate.change}% vs 2025-07-27
+              {exchangeRate.change}% vs 31-May-2025
+            </div> */}
+            <div
+              className = "text-sm text-red-600 font-medium" >
+              +0.47% vs 31-May-2025
             </div>
             <div className="text-xs text-gray-500 mt-1">USD-PKR exchange</div>
           </div>

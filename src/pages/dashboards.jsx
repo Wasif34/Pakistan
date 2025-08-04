@@ -30,6 +30,7 @@ import {
   Area,
   ReferenceArea,
   ReferenceLine,
+  LabelList,
 } from "recharts";
 
 // Import data
@@ -267,765 +268,598 @@ export const Dashboards = () => {
 
       <div className="p-6" >
 
-        {/* Header */}
-        {/*
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            {/* <h1 className="text-4xl font-bold bg-gradient-to-r from-green-500 to-green-700 bg-clip-text text-transparent">
-              Pakistan Economic Dashboard
-            </h1>
-            <p className="text-sm text-gray-600 mt-2">
-              Last updated: Monday, July 21, 2025
-            </p>
-          </div>
-           <div className="flex gap-3">
-            <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 shadow-sm">
-              <RefreshCw className="w-4 h-4" />
-              Refresh Data
-            </button>
-            <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-200 shadow-md hover:shadow-lg">
-              <Download className="w-4 h-4" />
-              Export Report
-            </button>
-          </div> 
-        </div> */}
-
         {/* KPI Cards Row 1 */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          {/* GDP Growth Rate Card */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">      
+          {/* GDP Growth Rate Card - Smaller Version */}
           <div
-            className="group bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
+            className="group bg-white p-4 rounded-lg shadow-md border border-gray-100 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
             onClick={() =>
               openModal(
                 "GDP Growth Rate Trend (Quarterly)",
-                <ResponsiveContainer width="100%" height={350}>
-                  <LineChart 
-                  data={gdpQuarterlyChartData}
-                  margin={{ top: 20, right: 20, bottom: 30, left: 20 }}>
+                <ResponsiveContainer width="100%" height={250}>
+                  <BarChart 
+                    data={gdpQuarterlyChartData}
+                    margin={{ top: 10, right: 15, bottom: 20, left: 15 }}
+                  >
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                     <XAxis
                       dataKey="label"
                       stroke="#666"
-                      label={{ value: "Quarter", position: "insideBottom", offset: -15 }}
+                      label={{ value: "Quarter", position: "insideBottom", offset: -10 }}
                     />
                     <YAxis
                       stroke="#666"
                       label={{ value: "Growth Rate (%)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }}
                     />
                     <Tooltip />
-                    <Line
-                      type="monotone"
-                      dataKey="growth"
-                      stroke="#3b82f6"
-                      strokeWidth={3}
-                      dot={{ fill: "#3b82f6", strokeWidth: 2, r: 5 }}
-                      activeDot={{ r: 7, fill: "#1d4ed8" }}
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
-              )
-            }
-          >
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-blue-100 rounded-lg group-hover:bg-blue-200 transition-colors">
-                  <TrendingUp className="w-6 h-6 text-blue-600" />
-                </div>
-                <span className="text-sm font-semibold text-gray-700">
-                  GDP Growth Rate
-                </span>
-              </div>
-              {latestGDPData[0].change_vs_last_quarter >= 0 ? (
-                <div className="p-1 bg-green-100 rounded-full">
-                  <TrendingUp className="w-4 h-4 text-green-600" />
-                </div>
-              ) : (
-                <div className="p-1 bg-red-100 rounded-full">
-                  <TrendingDown className="w-4 h-4 text-red-600" />
-                </div>
-              )}
-            </div>
-            <div className="text-3xl font-bold text-gray-800 mb-2">
-              {avgGDPGrowth.toFixed(1)}%
-            </div>
-            <div className="text-sm font-medium mb-1">
-              June - 2025
-            </div>
-            <div
-              className={`text-sm font-medium ${
-                latestGDPData[0].change_vs_last_quarter >= 0 ? "text-green-600" : "text-red-600"
-              }`}
-            >
-              {latestGDPData[0].change_vs_last_quarter >= 0 ? "+" : ""}
-              {latestGDPData[0].change_vs_last_quarter}% vs last quarter
-            </div>
-            <div className="text-xs text-gray-500 mt-1">
-              Average across all sectors
-            </div>
-          </div>
-
-          {/* Inflation Rate Card */}
-          <div
-            className="group bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
-            onClick={() =>
-              openModal(
-                "Inflation Rate Trend",
-                <ResponsiveContainer width="100%" height={350}>
-                  <BarChart data={inflationChartData} margin={{ top: 20, right: 20, bottom: 30, left: 20 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis
-                      dataKey="month"
-                      stroke="#666"
-                      label={{ value: "FY 2024-25", position: "insideBottom", offset: -15 }}
-                    />
-                    <YAxis
-                      stroke="#666"
-                      label={{ value: "Inflation Rate (%)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }}
-                    />
-                    <Tooltip />
-                    <Bar dataKey="inflation" fill="#ef4444" radius={[4, 4, 0, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
-              )
-            }
-          >
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-red-100 rounded-lg group-hover:bg-red-200 transition-colors">
-                  <TrendingUp className="w-6 h-6 text-red-600" />
-                </div>
-                <span className="text-sm font-semibold text-gray-700">
-                  Inflation Rate
-                </span>
-              </div>
-              {latestInflation.change >= 0 ? (
-                <div className="p-1 bg-red-100 rounded-full">
-                  <TrendingUp className="w-4 h-4 text-red-600" />
-                </div>
-              ) : (
-                <div className="p-1 bg-green-100 rounded-full">
-                  <TrendingDown className="w-4 h-4 text-green-600" />
-                </div>
-              )}
-            </div>
-            <div className="text-3xl font-bold text-gray-800 mb-2">
-              {latestInflation.value}%
-            </div>
-            <div className="text-sm font-medium mb-1">
-              {latestInflation.month} - {latestInflation.year}
-            </div>
-            <div
-              className={`text-sm font-medium ${
-                latestInflation.change >= 0 ? "text-red-600" : "text-green-600"
-              }`}
-            >
-              {latestInflation.change >= 0 ? "+" : ""}
-              {latestInflation.change}% vs last month
-            </div>
-            <div className="text-xs text-gray-500 mt-1">
-              Consumer Price Index
-            </div>
-          </div>
-
-          {/* Unemployment Rate Card */}
-          <div
-            className="group bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
-            onClick={() =>
-              openModal(
-                "Unemployment Rate Trend",
-                <ResponsiveContainer width="100%" height={350}>
-                  <BarChart data={unemploymentDataNew} margin={{ top: 20, right: 20, bottom: 30, left: 20 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis
-                      dataKey="year"
-                      stroke="#666"
-                      label={{ value: "Year", position: "insideBottom", offset: -15 }}
-                    />
-                    <YAxis
-                      stroke="#666"
-                      label={{ value: "Unemployment Rate (%)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }}
-                    />
-                    <Tooltip />
                     <Bar
-                      type="monotone"
-                      dataKey="value"
-                      fill= "#f59e42"
-                    />
-                  </BarChart>
-                </ResponsiveContainer>
-              )
-            }
-          >
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-orange-100 rounded-lg group-hover:bg-orange-200 transition-colors">
-                  <Users className="w-6 h-6 text-orange-600" />
-                </div>
-                <span className="text-sm font-semibold text-gray-700">
-                  Unemployment Rate
-                </span>
-              </div>
-              {latestUnemployment.change >= 0 ? (
-                <div className="p-1 bg-red-100 rounded-full">
-                  <TrendingUp className="w-4 h-4 text-red-600" />
-                </div>
-              ) : (
-                <div className="p-1 bg-green-100 rounded-full">
-                  <TrendingDown className="w-4 h-4 text-green-600" />
-                </div>
-              )}
-            </div>
-            <div className="text-3xl font-bold text-gray-800 mb-2">
-              {latestUnemployment.value}%
-            </div>
-            <div className="text-sm font-medium mb-1">
-              FY - {latestUnemployment.year}
-            </div>
-            <div
-              className={`text-sm font-medium ${
-                latestUnemployment.change >= 0
-                  ? "text-red-600"
-                  : "text-green-600"
-              }`}
-            >
-              {latestUnemployment.change >= 0 ? "+" : ""}
-              {latestUnemployment.change}% vs last year
-            </div>
-            <div className="text-xs text-gray-500 mt-1">
-              Labor force statistics
-            </div>
-          </div>
-
-          {/* Workers Remittance Card */}
-          <div
-            className="group bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
-            onClick={() =>
-              openModal(
-                "Workers Remittance Trend",
-                <ResponsiveContainer width="100%" height={350}>
-                  <LineChart data={remittanceChartData} margin={{ top: 20, right: 20, bottom: 30, left: 20 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis
-                      dataKey="month"
-                      stroke="#666"
-                      label={{ value: "FY 2024-25", position: "insideBottom", offset: -15 }}
-                    />
-                    <YAxis
-                      stroke="#666"
-                      label={{ value: "Remittance (B USD)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }}
-                    />
-                    <Tooltip />
-                    <Line
-                      type="monotone"
-                      dataKey="remittance"
-                      stroke="#10b981"
-                      strokeWidth={3}
-                      dot={{ fill: "#10b981", strokeWidth: 2, r: 5 }}
-                      activeDot={{ r: 7, fill: "#047857" }}
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
-              )
-            }
-          >
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-orange-100 rounded-lg group-hover:bg-orange-200 transition-colors">
-                  <Users className="w-6 h-6 text-orange-600" />
-                </div>
-                <span className="text-sm font-semibold text-gray-700">
-                  Workers Remittance
-                </span>
-              </div>
-              {latestRemittance.change >= 0 ? (
-                <div className="p-1 bg-red-100 rounded-full">
-                  <TrendingUp className="w-4 h-4 text-red-600" />
-                </div>
-              ) : (
-                <div className="p-1 bg-green-100 rounded-full">
-                  <TrendingDown className="w-4 h-4 text-green-600" />
-                </div>
-              )}
-            </div>
-            <div className="text-3xl font-bold text-gray-800 mb-2">
-              $38.29B <span className="text-sm font-medium">FY 2024-25</span>
-            </div>
-            <div className="text-sm font-bold mb-1">
-              ${latestRemittance.amount}B <span className="text-sm font-medium">June - 2025</span>
-            </div>
-            <div
-              className={`text-sm font-medium ${
-                latestRemittance.change < 0 ? "text-red-600" : "text-green-600"
-              }`}
-            >
-              {latestRemittance.change >= 0 ? "+" : ""}
-              {latestRemittance.change}% vs last month
-            </div>
-            <div className="text-xs text-gray-500 mt-1">
-              Labor force statistics
-            </div>
-          </div>
-        </div>
-
-        {/* KPI Cards Row 2 */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          {/* Current Account Card */}
-          <div
-            className="group bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
-            onClick={() =>
-              openModal(
-                "Current Account Trend",
-                <ResponsiveContainer width="100%" height={350}>
-                  <BarChart data={currentData} margin={{ top: 20, right: 20, bottom: 30, left: 20 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis
-                      dataKey="year"
-                      stroke="#666"
-                      label={{ value: "Year", position: "insideBottom", offset: -15 }}
-                    />
-                    <YAxis
-                      stroke="#666"
-                      label={{ value: "Balance (B USD)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" }} }
-                    />
-                    <Tooltip />
-                    <ReferenceLine y={0} stroke="#000" />
-                    <Bar dataKey="value">
-                      {currentData.map((entry, index) => (
-                        <Cell
-                          key={`cell-${index}`}
-                          fill={entry.value < 0 ? "#ef4444" : "#10b981"}
-                        />
-                      ))}
+                      // type="monotone"
+                      dataKey="growth"
+                      fill="#10b981"
+                      // stroke="#3b82f6"
+                      // strokeWidth={2}
+                      // dot={{ fill: "#3b82f6", strokeWidth: 1.5, r: 4 }}
+                      // activeDot={{ r: 6, fill: "#1d4ed8" }}
+                    >
+                      <LabelList 
+                        dataKey="growth" 
+                        position="top" 
+                        style={{ fontSize: "10px", fill: "#374151", fontWeight: "bold" }}
+                        formatter={(value) => `${value}%`}
+                      />
                     </Bar>
                   </BarChart>
                 </ResponsiveContainer>
               )
             }
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-green-100 rounded-lg group-hover:bg-green-200 transition-colors">
-                  <DollarSign className="w-6 h-6 text-green-600" />
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <div className="p-2 bg-blue-100 rounded-md group-hover:bg-blue-200 transition-colors">
+                  <TrendingUp className="w-5 h-5 text-blue-600" />
                 </div>
-                <span className="text-sm font-semibold text-gray-700">
-                  Current Account
+                <span className="text-md font-semibold text-gray-700">
+                  GDP Growth Rate
                 </span>
               </div>
-              {latestCurrentAccount.change >= 0 ? (
+              {latestGDPData[0].change_vs_last_quarter >= 0 ? (
                 <div className="p-1 bg-green-100 rounded-full">
-                  <TrendingUp className="w-4 h-4 text-green-600" />
+                  <TrendingUp className="w-3 h-3 text-green-600" />
                 </div>
               ) : (
                 <div className="p-1 bg-red-100 rounded-full">
-                  <TrendingDown className="w-4 h-4 text-red-600" />
+                  <TrendingDown className="w-3 h-3 text-red-600" />
                 </div>
               )}
             </div>
-            <div className="text-3xl font-bold text-gray-800 mb-2">
-              {latestCurrentAccount.value >= 0 ? "+" : ""}
-              {latestCurrentAccount.value}
-              <span className="text-lg">B USD</span>
+            <div className="text-2xl font-bold text-gray-800 mb-1">
+              {avgGDPGrowth.toFixed(1)}%
             </div>
-            <div className="text-sm font-medium mb-1">
-              FY - 2025
+            <div className="text-xs font-medium mb-0.5">
+              June - 2025
             </div>
-            <div className="text-xs text-gray-500 mt-1">
-              Balance of payments
+            <div
+              className={`text-xs font-medium ${
+                latestGDPData[0].change_vs_last_quarter >= 0 ? "text-green-600" : "text-red-600"
+              }`}
+            >
+              {latestGDPData[0].change_vs_last_quarter >= 0 ? "+" : ""}
+              {latestGDPData[0].change_vs_last_quarter}% vs last quarter
             </div>
           </div>
 
-          {/* Foreign Reserves Card */}
+          {/* Inflation Rate Card - Smaller Version */}
           <div
-            className="group bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
+            className="group bg-white p-4 rounded-lg shadow-md border border-gray-100 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
+            onClick={() =>
+              openModal(
+                "Inflation Rate Trend",
+                <ResponsiveContainer width="100%" height={250}>
+                  <BarChart data={inflationChartData} margin={{ top: 10, right: 15, bottom: 20, left: 10 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                    <XAxis dataKey="month" stroke="#666" label={{ value: "FY 2024-25", position: "insideBottom", offset: -10 }} />
+                    <YAxis stroke="#666" label={{ value: "Inflation Rate (%)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }} />
+                    <Tooltip />
+                    <Bar dataKey="inflation" fill="#ef4444" radius={[3, 3, 0, 0]}>
+                    <LabelList 
+                        dataKey="inflation" 
+                        position="top" 
+                        style={{ fontSize: "10px", fill: "#374151", fontWeight: "bold" }}
+                        formatter={(value) => `${value}%`}
+                      />
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              )
+            }
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <div className="p-2 bg-red-100 rounded-md group-hover:bg-red-200 transition-colors">
+                  <TrendingUp className="w-5 h-5 text-red-600" />
+                </div>
+                <span className="text-md font-semibold text-gray-700">Inflation Rate</span>
+              </div>
+              <div className={`p-1 rounded-full ${latestInflation.change >= 0 ? "bg-red-100" : "bg-green-100"}`}>
+                {latestInflation.change >= 0 ? (
+                  <TrendingUp className="w-3 h-3 text-red-600" />
+                ) : (
+                  <TrendingDown className="w-3 h-3 text-green-600" />
+                )}
+              </div>
+            </div>
+            <div className="text-2xl font-bold text-gray-800 mb-1">{latestInflation.value}%</div>
+            <div className="text-xs font-medium mb-0.5">{latestInflation.month} - {latestInflation.year}</div>
+            <div className={`text-xs font-medium ${latestInflation.change >= 0 ? "text-red-600" : "text-green-600"}`}>
+              {latestInflation.change >= 0 ? "+" : ""}
+              {latestInflation.change}% vs last month
+            </div>
+          </div>
+
+          {/* Unemployment Rate Card - Smaller Version */}
+          <div
+            className="group bg-white p-4 rounded-lg shadow-md border border-gray-100 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
+            onClick={() =>
+              openModal(
+                "Unemployment Rate Trend",
+                <ResponsiveContainer width="100%" height={250}>
+                  <BarChart data={unemploymentDataNew} margin={{ top: 10, right: 15, bottom: 20, left: 10 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                    <XAxis dataKey="year" stroke="#666" label={{ value: "Year", position: "insideBottom", offset: -10 }} />
+                    <YAxis stroke="#666" label={{ value: "Unemployment Rate (%)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }} />
+                    <Tooltip />
+                    <Bar dataKey="value" fill="#f59e42">
+                      <LabelList 
+                        dataKey="value" 
+                        position="top" 
+                        style={{ fontSize: "10px", fill: "#374151", fontWeight: "bold" }}
+                        formatter={(value) => `${value}%`}
+                      />
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              )
+            }
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <div className="p-2 bg-orange-100 rounded-md group-hover:bg-orange-200 transition-colors">
+                  <Users className="w-5 h-5 text-orange-600" />
+                </div>
+                <span className="text-md font-semibold text-gray-700">Unemployment Rate</span>
+              </div>
+              <div className={`p-1 rounded-full ${latestUnemployment.change >= 0 ? "bg-red-100" : "bg-green-100"}`}>
+                {latestUnemployment.change >= 0 ? (
+                  <TrendingUp className="w-3 h-3 text-red-600" />
+                ) : (
+                  <TrendingDown className="w-3 h-3 text-green-600" />
+                )}
+              </div>
+            </div>
+            <div className="text-2xl font-bold text-gray-800 mb-1">{latestUnemployment.value}%</div>
+            <div className="text-xs font-medium mb-0.5">FY - {latestUnemployment.year}</div>
+            <div className={`text-xs font-medium ${latestUnemployment.change >= 0 ? "text-red-600" : "text-green-600"}`}>
+              {latestUnemployment.change >= 0 ? "+" : ""}
+              {latestUnemployment.change}% vs last year
+            </div>
+          </div>
+
+          {/* Workers Remittance Card - Smaller Version */}
+          <div
+            className="group bg-white p-4 rounded-lg shadow-md border border-gray-100 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
+            onClick={() =>
+              openModal(
+                "Workers Remittance Trend",
+                <ResponsiveContainer width="100%" height={250}>
+                  <LineChart data={remittanceChartData} margin={{ top: 10, right: 15, bottom: 20, left: 10 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                    <XAxis dataKey="month" stroke="#666" label={{ value: "FY 2024-25", position: "insideBottom", offset: -10 }} />
+                    <YAxis stroke="#666" label={{ value: "Remittance (B USD)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }} />
+                    <Tooltip />
+                    <Line
+                      type="monotone"
+                      dataKey="remittance"
+                      stroke="#10b981"
+                      strokeWidth={2}
+                      dot={{ fill: "#10b981", strokeWidth: 1.5, r: 4 }}
+                      activeDot={{ r: 6, fill: "#047857" }}
+                    >
+                      <LabelList 
+                        dataKey="remittance" 
+                        position="top" 
+                        style={{ fontSize: "10px", fill: "#374151", fontWeight: "bold" }}
+                        formatter={(value) => `${value}B`}
+                      />
+                    </Line>
+                  </LineChart>
+                </ResponsiveContainer>
+              )
+            }
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <div className="p-2 bg-orange-100 rounded-md group-hover:bg-orange-200 transition-colors">
+                  <Users className="w-5 h-5 text-orange-600" />
+                </div>
+                <span className="text-md font-semibold text-gray-700">Workers Remittance</span>
+              </div>
+              <div className={`p-1 rounded-full ${latestRemittance.change >= 0 ? "bg-red-100" : "bg-green-100"}`}>
+                {latestRemittance.change >= 0 ? (
+                  <TrendingUp className="w-3 h-3 text-red-600" />
+                ) : (
+                  <TrendingDown className="w-3 h-3 text-green-600" />
+                )}
+              </div>
+            </div>
+            <div className="text-xl font-bold text-gray-800 mb-1">$38.29B <span className="text-xs font-medium">FY 2024-25</span></div>
+            <div className="text-xs font-bold mb-0.5">
+              ${latestRemittance.amount}B <span className="text-xs font-medium">June - 2025</span>
+            </div>
+            <div className={`text-xs font-medium ${latestRemittance.change < 0 ? "text-red-600" : "text-green-600"}`}>
+              {latestRemittance.change >= 0 ? "+" : ""}
+              {latestRemittance.change}% vs last month
+            </div>
+          </div>
+        </div>
+
+        {/* KPI Cards Row 2 */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+          {/* Current Account Card - Smaller Version */}
+          <div
+            className="group bg-white p-4 rounded-lg shadow-md border border-gray-100 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
+            onClick={() =>
+              openModal(
+                "Current Account Trend",
+                <ResponsiveContainer width="100%" height={250}>
+                  <BarChart data={currentData} margin={{ top: 10, right: 10, bottom: 20, left: 10 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                    <XAxis dataKey="year" stroke="#666" label={{ value: "Year", position: "insideBottom", offset: -10 }} />
+                    <YAxis stroke="#666" label={{ value: "Balance (Billion USD)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }} />
+                    <Tooltip />
+                    <ReferenceLine y={0} stroke="#000" />
+                    <Bar dataKey="value">
+                      {currentData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.value < 0 ? "#ef4444" : "#10b981"} />
+                      ))}
+                     <LabelList 
+                        dataKey="value" 
+                        position="top" 
+                        style={{ fontSize: "10px", fill: "#374151", fontWeight: "bold" }}
+                        formatter={(value) => `${value}B`}
+                      />
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              )
+            }
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <div className="p-2 bg-green-100 rounded-md group-hover:bg-green-200 transition-colors">
+                  <DollarSign className="w-5 h-5 text-green-600" />
+                </div>
+                <span className="text-md font-semibold text-gray-700">Current Account</span>
+              </div>
+              <div className={`p-1 rounded-full ${latestCurrentAccount.change >= 0 ? "bg-green-100" : "bg-red-100"}`}>
+                {latestCurrentAccount.change >= 0 ? (
+                  <TrendingUp className="w-3 h-3 text-green-600" />
+                ) : (
+                  <TrendingDown className="w-3 h-3 text-red-600" />
+                )}
+              </div>
+            </div>
+            <div className="text-2xl font-bold text-gray-800 mb-1">
+              {latestCurrentAccount.value >= 0 ? "+" : ""}
+              {latestCurrentAccount.value}
+              <span className="text-sm">B USD</span>
+            </div>
+            <div className="text-xs font-medium mb-0.5">FY - 2025</div>
+            <div className="text-[10px] text-gray-500 mt-0.5">Balance of payments</div>
+          </div>
+
+          {/* Foreign Reserves Card - Smaller Version */}
+          <div
+            className="group bg-white p-4 rounded-lg shadow-md border border-gray-100 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
             onClick={() =>
               openModal(
                 "Foreign Reserves Trend",
-                <ResponsiveContainer width="100%" height={350}>
-                  <LineChart data={foreignReserveData} margin={{ top: 20, right: 20, bottom: 30, left: 20 }}>
+                <ResponsiveContainer width="100%" height={250}>
+                  <LineChart data={foreignReserveData} margin={{ top: 10, right: 15, bottom: 20, left: 10 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis
-                      dataKey="month"
-                      stroke="#666"
-                      label={{ value: "FY 2024-25", position: "insideBottom", offset: -15 }}
-                    />
-                    <YAxis
-                      stroke="#666"
-                      label={{ value: "Reserves (B USD)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }}
-                    />
+                    <XAxis dataKey="month" stroke="#666" label={{ value: "FY 2024-25", position: "insideBottom", offset: -10 }} />
+                    <YAxis stroke="#666" label={{ value: "Reserves (B USD)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }} />
                     <Tooltip />
                     <Line
                       type="monotone"
                       dataKey="totalReserves"
                       stroke="#3b82f6"
-                      strokeWidth={3}
-                      dot={{ fill: "#3b82f6", strokeWidth: 2, r: 5 }}
-                      activeDot={{ r: 7, fill: "#1d4ed8" }}
-                    />
+                      strokeWidth={2}
+                      dot={{ fill: "#3b82f6", strokeWidth: 1.5, r: 4 }}
+                      activeDot={{ r: 6, fill: "#1d4ed8" }}
+                    >
+                      <LabelList 
+                        dataKey="totalReserves" 
+                        position="top" 
+                        style={{ fontSize: "10px", fill: "#374151", fontWeight: "bold" }}
+                        formatter={(value) => `${value}B`}
+                      />
+                    </Line>
                   </LineChart>
                 </ResponsiveContainer>
               )
             }
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-blue-100 rounded-lg group-hover:bg-blue-200 transition-colors">
-                  <BarChart3 className="w-6 h-6 text-blue-600" />
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <div className="p-2 bg-blue-100 rounded-md group-hover:bg-blue-200 transition-colors">
+                  <BarChart3 className="w-5 h-5 text-blue-600" />
                 </div>
-                <span className="text-sm font-semibold text-gray-700">
-                  Foreign Reserves
-                </span>
+                <span className="text-md font-semibold text-gray-700">Foreign Reserves</span>
               </div>
-              {latestExchange.change >= 0 ? (
-                <div className="p-1 bg-green-100 rounded-full">
-                  <TrendingUp className="w-4 h-4 text-green-600" />
-                </div>
-              ) : (
-                <div className="p-1 bg-red-100 rounded-full">
-                  <TrendingDown className="w-4 h-4 text-red-600" />
-                </div>
-              )}
+              <div className={`p-1 rounded-full ${latestExchange.change >= 0 ? "bg-green-100" : "bg-red-100"}`}>
+                {latestExchange.change >= 0 ? (
+                  <TrendingUp className="w-3 h-3 text-green-600" />
+                ) : (
+                  <TrendingDown className="w-3 h-3 text-red-600" />
+                )}
+              </div>
             </div>
-            <div className="text-3xl font-bold text-gray-800 mb-2">
+            <div className="text-2xl font-bold text-gray-800 mb-1">
               {latestExchange.totalReserves}
-              <span className="text-lg">B USD</span>
+              <span className="text-sm">B USD</span>
             </div>
-            <div className="text-sm font-medium mb-1">
-              June - 2025
-            </div>
-            <div
-              className={`text-sm font-medium ${
-                latestExchange.change >= 0 ? "text-green-600" : "text-red-600"
-              }`}
-            >
+            <div className="text-xs font-medium mb-0.5">June - 2025</div>
+            <div className={`text-xs font-medium ${latestExchange.change >= 0 ? "text-green-600" : "text-red-600"}`}>
               {latestExchange.change >= 0 ? "+" : ""}
               {latestExchange.change}B vs last month
             </div>
-            <div className="text-xs text-gray-500 mt-1">SBP forex reserves</div>
           </div>
 
-          {/* Exchange Rate Card */}
+          {/* Exchange Rate Card - Smaller Version */}
           <div
-            className="group bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
+            className="group bg-white p-4 rounded-lg shadow-md border border-gray-100 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
             onClick={() =>
-              openModal(
-                "USD to PKR Exchange Rate Trend",
-                // <ResponsiveContainer width="100%" height={350}>
-                //   <LineChart data={currencyDataFormatted} margin={{ top: 20, right: 20, bottom: 30, left: 30 }}>
-                //     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                //     <XAxis
-                //       dataKey="dateShort"
-                //       stroke="#666"
-                //       label={{ value: "Date", position: "insideBottom", offset: -15 }}
-                //     />
-                //     <YAxis
-                //       stroke="#666"
-                //       label={{ value: "PKR/USD", angle: -90, position: "insideLeft", offset: -15, style: { textAnchor: "middle" } }}
-                //       domain={['dataMin - 1', 'dataMax + 1']}
-                //       tickCount={6}
-                //     />
-                //     <Tooltip />
-                //     <Line
-                //       type="monotone"
-                //       dataKey="USDtoPKR"
-                //       stroke="#a855f7"
-                //       strokeWidth={3}
-                //       dot={{ fill: "#a855f7", strokeWidth: 2, r: 5 }}
-                //       activeDot={{ r: 7, fill: "#7c3aed" }}
-                //     />
-                //   </LineChart>
-                // </ResponsiveContainer>
-                <ExchangeRateChart />
-              )
+              openModal("USD to PKR Exchange Rate Trend", <ExchangeRateChart />)
             }
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-purple-100 rounded-lg group-hover:bg-purple-200 transition-colors">
-                  <DollarSign className="w-6 h-6 text-purple-600" />
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <div className="p-2 bg-purple-100 rounded-md group-hover:bg-purple-200 transition-colors">
+                  <DollarSign className="w-5 h-5 text-purple-600" />
                 </div>
-                <span className="text-sm font-semibold text-gray-700">
-                  Exchange Rate (USD to PKR)
-                </span>
+                <span className="text-md font-semibold text-gray-700">Exchange Rate</span>
               </div>
-              {exchangeRate.change >= 0 ? (
-                <div className="p-1 bg-red-100 rounded-full">
-                  <TrendingUp className="w-4 h-4 text-red-600" />
-                </div>
-              ) : (
-                <div className="p-1 bg-green-100 rounded-full">
-                  <TrendingDown className="w-4 h-4 text-green-600" />
-                </div>
-              )}
+              <div className={`p-1 rounded-full ${exchangeRate.change >= 0 ? "bg-red-100" : "bg-green-100"}`}>
+                {exchangeRate.change >= 0 ? (
+                  <TrendingUp className="w-3 h-3 text-red-600" />
+                ) : (
+                  <TrendingDown className="w-3 h-3 text-green-600" />
+                )}
+              </div>
             </div>
-            <div className="text-3xl font-bold text-gray-800 mb-2">
-              {exchangeRate.USDtoPKR.toFixed(2)}
-              <span className="text-lg">PKR/USD</span>
+            <div className="text-2xl font-bold text-gray-800 mb-1">
+              {exchangeRate.USDtoPKR.toFixed(2)} <span className="text-sm">PKR/USD</span>
             </div>
-            <div className="text-sm font-medium mb-1">
-              {exchangeRate.date}
-            </div>
-            {/* <div
-              className={`text-sm font-medium ${
-                exchangeRate.change > 0 ? "text-red-600" : "text-green-600"
-              }`}
-            >
-              {exchangeRate.change > 0 ? "+" : ""}
-              {exchangeRate.change}% vs 31-May-2025
-            </div> */}
-            <div
-              className = "text-sm text-red-600 font-medium" >
-              +0.47% vs 31-May-2025
-            </div>
-            <div className="text-xs text-gray-500 mt-1">USD-PKR exchange</div>
+            <div className="text-xs font-medium mb-0.5">{exchangeRate.date}</div>
+            <div className="text-xs font-medium text-red-600">+0.47% vs 31-May-2025</div>
           </div>
 
-          {/* Interest Rate Card */}
+          {/* Interest Rate Card - Smaller Version */}
           <div
-            className="group bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
+            className="group bg-white p-4 rounded-lg shadow-md border border-gray-100 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
             onClick={() =>
               openModal(
                 "Interest Rate Trend",
-                <ResponsiveContainer width="100%" height={350}>
-                  <LineChart data={interestDataNew} margin={{ top: 20, right: 20, bottom: 30, left: 20 }}>
+                <ResponsiveContainer width="100%" height={250}>
+                  <LineChart data={interestDataNew} margin={{ top: 10, right: 10, bottom: 20, left: 10 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis
-                      dataKey="month"
-                      stroke="#666"
-                      label={{ value: "FY 2024-25", position: "insideBottom", offset: -15 }}
-                    />
-                    <YAxis
-                      stroke="#666"
-                      label={{ value: "Interest Rate (%)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }}
-                    />
+                    <XAxis dataKey="month" stroke="#666" label={{ value: "FY 2024-25", position: "insideBottom", offset: -10 }} />
+                    <YAxis stroke="#666" label={{ value: "Interest Rate (%)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }} />
                     <Tooltip />
                     <Line
                       type="monotone"
                       dataKey="rate"
                       stroke="#f59e42"
-                      strokeWidth={3}
-                      dot={{ fill: "#f59e42", strokeWidth: 2, r: 5 }}
-                      activeDot={{ r: 7, fill: "#ea580c" }}
-                    />
+                      strokeWidth={2}
+                      dot={{ fill: "#f59e42", strokeWidth: 1.5, r: 4 }}
+                      activeDot={{ r: 6, fill: "#ea580c" }}
+                    >
+                      <LabelList 
+                        dataKey="rate" 
+                        position="top" 
+                        style={{ fontSize: "10px", fill: "#374151", fontWeight: "bold" }}
+                        formatter={(value) => `${value}%`}
+                      />
+                    </Line>
                   </LineChart>
                 </ResponsiveContainer>
               )
             }
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-orange-100 rounded-lg group-hover:bg-orange-200 transition-colors">
-                  <Users className="w-6 h-6 text-orange-600" />
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <div className="p-2 bg-orange-100 rounded-md group-hover:bg-orange-200 transition-colors">
+                  <Users className="w-5 h-5 text-orange-600" />
                 </div>
-                <span className="text-sm font-semibold text-gray-700">
-                  Interest Rate
-                </span>
+                <span className="text-md font-semibold text-gray-700">Interest Rate</span>
               </div>
-              {latestInterest.change >= 0 ? (
-                <div className="p-1 bg-red-100 rounded-full">
-                  <TrendingUp className="w-4 h-4 text-red-600" />
-                </div>
-              ) : (
-                <div className="p-1 bg-green-100 rounded-full">
-                  <TrendingDown className="w-4 h-4 text-green-600" />
-                </div>
-              )}
+              <div className={`p-1 rounded-full ${latestInterest.change >= 0 ? "bg-red-100" : "bg-green-100"}`}>
+                {latestInterest.change > 0 ? (
+                  <TrendingUp className="w-3 h-3 text-red-600" />
+                ) : (
+                  <TrendingDown className="w-3 h-3 text-green-600" />
+                )}
+              </div>
             </div>
-            <div className="text-3xl font-bold text-gray-800 mb-2">
-              {latestInterest.rate}%
-            </div>
-            <div className="text-sm font-medium mb-1">
-              June - 2025
-            </div>
-            <div
-              className={`text-sm font-medium ${
-                latestInterest.change >= 0 ? "text-red-600" : "text-green-600"
-              }`}
-            >
-              {latestInterest.change > 0 ? "+" : ""}
+            <div className="text-2xl font-bold text-gray-800 mb-1">{latestInterest.rate}%</div>
+            <div className="text-xs font-medium mb-0.5">June - 2025</div>
+            <div className={`text-xs font-medium ${latestInterest.change >= 0 ? "text-red-600" : "text-green-600"}`}>
+              {latestInterest.change >= 0 ? "+" : ""}
               {latestInterest.change}% vs last month
-            </div>
-            <div className="text-xs text-gray-500 mt-1">
-              Labor force statistics
             </div>
           </div>
         </div>
 
         {/* KPI Cards Row 3 */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          {/* Export Goods */}
+          {/* Export Goods - Smaller Version */}
           <div
-            className="group bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
+            className="group bg-white p-4 rounded-xl shadow-md border border-gray-100 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
             onClick={() =>
               openModal(
                 "Export of Goods Trend",
                 <ResponsiveContainer width="100%" height={350}>
                   <BarChart data={exportGoods} margin={{ top: 20, right: 20, bottom: 30, left: 20 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis
-                      dataKey="month"
-                      stroke="#666"
-                      label={{ value: "FY 2024-25", position: "insideBottom", offset: -15 }}
-                    />
-                    <YAxis
-                      stroke="#666"
-                      label={{ value: "Value (Billion US $)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }}
-                    />
+                    <XAxis dataKey="month" stroke="#666" label={{ value: "FY 2024-25", position: "insideBottom", offset: -15 }} />
+                    <YAxis stroke="#666" label={{ value: "Value (Billion USD)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }} />
                     <Tooltip />
-                    <Bar dataKey="value" fill="#10b981" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="value" fill="#10b981" radius={[4, 4, 0, 0]}>
+                      <LabelList 
+                        dataKey="value" 
+                        position="top" 
+                        style={{ fontSize: "10px", fill: "#374151", fontWeight: "bold" }}
+                        formatter={(value) => `${value}B`}
+                      />
+                    </Bar>
                   </BarChart>
                 </ResponsiveContainer>
               )
             }
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-green-100 rounded-lg group-hover:bg-green-200 transition-colors">
-                  <Download className="w-6 h-6 text-green-600" />
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <div className="p-2 bg-green-100 rounded-lg group-hover:bg-green-200 transition-colors">
+                  <Download className="w-5 h-5 text-green-600" />
                 </div>
-                <span className="text-sm font-semibold text-gray-700">
-                  Export of Goods
-                </span>
+                <span className="text-md font-semibold text-gray-700">Export of Goods</span>
               </div>
             </div>
-            <div className="text-3xl font-bold text-gray-800 mb-2">
+            <div className="text-2xl font-bold text-gray-800 mt-4 mb-1">
               ${exportGoods.reduce((acc, curr) => acc + curr.value, 0).toLocaleString()}B
             </div>
-            <div className="text-sm font-medium text-gray-600">
-              FY 2024-25
-            </div>
+            <div className="text-xs font-medium text-gray-600 mb-2">FY 2024-25</div>
           </div>
 
-          {/* Import Goods */}
+          {/* Import Goods - Smaller Version */}
           <div
-            className="group bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
+            className="group bg-white p-4 rounded-xl shadow-md border border-gray-100 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
             onClick={() =>
               openModal(
                 "Import of Goods Trend",
                 <ResponsiveContainer width="100%" height={350}>
                   <BarChart data={importGoods} margin={{ top: 20, right: 20, bottom: 30, left: 20 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis
-                      dataKey="month"
-                      stroke="#666"
-                      label={{ value: "FY 2024-25", position: "insideBottom", offset: -15 }}
-                    />
-                    <YAxis
-                      stroke="#666"
-                      label={{ value: "Value (Billion US $)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }}
-                    />
+                    <XAxis dataKey="month" stroke="#666" label={{ value: "FY 2024-25", position: "insideBottom", offset: -15 }} />
+                    <YAxis stroke="#666" label={{ value: "Value (Billion USD)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }} />
                     <Tooltip />
-                    <Bar dataKey="value" fill="#ef4444" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="value" fill="#ef4444" radius={[4, 4, 0, 0]}> 
+                      <LabelList 
+                        dataKey="value" 
+                        position="top" 
+                        style={{ fontSize: "10px", fill: "#374151", fontWeight: "bold" }}
+                        formatter={(value) => `${value}B`}
+                      />
+                    </Bar>
                   </BarChart>
                 </ResponsiveContainer>
               )
             }
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-red-100 rounded-lg group-hover:bg-red-200 transition-colors">
-                  <Download className="w-6 h-6 text-red-600 rotate-180" />
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <div className="p-2 bg-red-100 rounded-lg group-hover:bg-red-200 transition-colors">
+                  <Download className="w-5 h-5 text-red-600 rotate-180" />
                 </div>
-                <span className="text-sm font-semibold text-gray-700">
-                  Import of Goods
-                </span>
+                <span className="text-md font-semibold text-gray-700">Import of Goods</span>
               </div>
             </div>
-            <div className="text-3xl font-bold text-gray-800 mb-2">
+            <div className="text-2xl font-bold text-gray-800 mt-4 mb-1">
               ${importGoods.reduce((acc, curr) => acc + curr.value, 0).toLocaleString()}B
             </div>
-            <div className="text-sm font-medium text-gray-600">
-              FY 2024-25
-            </div>
+            <div className="text-xs font-medium text-gray-600 mb-2">FY 2024-25</div>
           </div>
 
-          {/* Export Services */}
+          {/* Export Services - Smaller Version */}
           <div
-            className="group bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
+            className="group bg-white p-4 rounded-xl shadow-md border border-gray-100 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
             onClick={() =>
               openModal(
                 "Export of Services Trend",
                 <ResponsiveContainer width="100%" height={350}>
                   <BarChart data={exportServices} margin={{ top: 20, right: 20, bottom: 30, left: 20 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis
-                      dataKey="month"
-                      stroke="#666"
-                      label={{ value: "FY 2024-25", position: "insideBottom", offset: -15 }}
-                    />
-                    <YAxis
-                      stroke="#666"
-                      label={{ value: "Value (Million US $)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }}
-                    />
+                    <XAxis dataKey="month" stroke="#666" label={{ value: "FY 2024-25", position: "insideBottom", offset: -15 }} />
+                    <YAxis stroke="#666" label={{ value: "Value (Million USD)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }} />
                     <Tooltip />
-                    <Bar dataKey="value" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="value" fill="#3b82f6" radius={[4, 4, 0, 0]} > 
+                      <LabelList 
+                        dataKey="value" 
+                        position="top" 
+                        style={{ fontSize: "10px", fill: "#374151", fontWeight: "bold" }}
+                        formatter={(value) => `${value}M`}
+                      />
+                    </Bar>
                   </BarChart>
                 </ResponsiveContainer>
               )
             }
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-blue-100 rounded-lg group-hover:bg-blue-200 transition-colors">
-                  <Download className="w-6 h-6 text-blue-600" />
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <div className="p-2 bg-blue-100 rounded-lg group-hover:bg-blue-200 transition-colors">
+                  <Download className="w-5 h-5 text-blue-600" />
                 </div>
-                <span className="text-sm font-semibold text-gray-700">
-                  Export of Services
-                </span>
+                <span className="text-md font-semibold text-gray-700">Export of Services</span>
               </div>
             </div>
-            <div className="text-3xl font-bold text-gray-800 mb-2">
+            <div className="text-2xl font-bold text-gray-800 mt-4 mb-1">
               ${(exportServices.reduce((acc, curr) => acc + curr.value, 0) / 1000).toFixed(2)}B
             </div>
-            <div className="text-sm font-medium text-gray-600">
-              FY 2024-25
-            </div>
+            <div className="text-xs font-medium text-gray-600 mb-2">FY 2024-25</div>
           </div>
 
-          {/* Import Services */}
+          {/* Import Services - Smaller Version */}
           <div
-            className="group bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
+            className="group bg-white p-4 rounded-xl shadow-md border border-gray-100 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
             onClick={() =>
               openModal(
                 "Import of Services Trend",
                 <ResponsiveContainer width="100%" height={350}>
                   <BarChart data={importServices} margin={{ top: 20, right: 20, bottom: 30, left: 20 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis
-                      dataKey="month"
-                      stroke="#666"
-                      label={{ value: "FY 2024-25", position: "insideBottom", offset: -15 }}
-                    />
-                    <YAxis
-                      stroke="#666"
-                      label={{ value: "Value (Million US $)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }}
-                    />
+                    <XAxis dataKey="month" stroke="#666" label={{ value: "FY 2024-25", position: "insideBottom", offset: -15 }} />
+                    <YAxis stroke="#666" label={{ value: "Value (Million USD)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }} />
                     <Tooltip />
-                    <Bar dataKey="value" fill="#a855f7" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="value" fill="#a855f7" radius={[4, 4, 0, 0]} > 
+                      <LabelList 
+                        dataKey="value" 
+                        position="top" 
+                        style={{ fontSize: "10px", fill: "#374151", fontWeight: "bold" }}
+                        formatter={(value) => `${value}M`}
+                      />
+                    </Bar>
                   </BarChart>
                 </ResponsiveContainer>
               )
             }
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-purple-100 rounded-lg group-hover:bg-purple-200 transition-colors">
-                  <Download className="w-6 h-6 text-purple-600 rotate-180" />
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <div className="p-2 bg-purple-100 rounded-lg group-hover:bg-purple-200 transition-colors">
+                  <Download className="w-5 h-5 text-purple-600 rotate-180" />
                 </div>
-                <span className="text-sm font-semibold text-gray-700">
-                  Import of Services
-                </span>
+                <span className="text-md font-semibold text-gray-700">Import of Services</span>
               </div>
             </div>
-            <div className="text-3xl font-bold text-gray-800 mb-2">
+            <div className="text-2xl font-bold text-gray-800 mt-4 mb-1">
               ${(importServices.reduce((acc, curr) => acc + curr.value, 0) / 1000).toFixed(2)}B
             </div>
-            <div className="text-sm font-medium text-gray-600">
-              FY 2024-25
-            </div>
+            <div className="text-xs font-medium text-gray-600 mb-2">FY 2024-25</div>
           </div>
         </div>
 
-        {/* Charts and Notifications Section */}
+        {/* Top Charts Row */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {/* KPI Charts Section */}
           <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
@@ -1194,6 +1028,7 @@ export const Dashboards = () => {
           </div>
         </div>
 
+        {/* Middle Charts Row */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           {/* GDP Growth Chart */}
           <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
@@ -1345,7 +1180,7 @@ function KseIndexAreaChart({ kseIndexData }) {
       <ResponsiveContainer width="100%" height={300}>
         <AreaChart
           data={kseIndexData}
-          margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+          margin={{ top: 10, right: 30, left: 5, bottom: 0 }}
         >
           <defs>
             <linearGradient id="colorIndex" x1="0" y1="0" x2="0" y2="1">

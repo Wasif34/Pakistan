@@ -44,17 +44,17 @@ import interestData from "../data/interest.json";
 import kseData from "../data/kse.json";
 
 // new
-import exportGoods from "../data/exportGoods.json"
-import importGoods from "../data/importGoods.json"
-import exportServices from "../data/exportServices.json"
-import importServices from "../data/importServices.json"
-import gdpGrowthQuarterly from "../data/gdp-growth-quarterly.json"
-import inflationRateData from "../data/inflation-rate-new.json"
-import unemploymentDataNew from "../data/unemployment-2024.json"
-import workersRemittance from "../data/workers-remittance.json"
-import currentData from "../data/current-new.json"
-import foreignReserveData from "../data/foreign-reserves.json"
-import interestDataNew from "../data/interest-new.json"
+import exportGoods from "../data/exportGoods.json";
+import importGoods from "../data/importGoods.json";
+import exportServices from "../data/exportServices.json";
+import importServices from "../data/importServices.json";
+import gdpGrowthQuarterly from "../data/gdp-growth-quarterly.json";
+import inflationRateData from "../data/inflation-rate-new.json";
+import unemploymentDataNew from "../data/unemployment-2024.json";
+import workersRemittance from "../data/workers-remittance.json";
+import currentData from "../data/current-new.json";
+import foreignReserveData from "../data/foreign-reserves.json";
+import interestDataNew from "../data/interest-new.json";
 // import currencyData from "../data/currency.json"
 import currencyData from "../data/currency-historical.json";
 import kseDataNew from "../data/kse-new.json";
@@ -93,15 +93,16 @@ function Modal({ open, onClose, title, children }) {
 }
 
 function addPercentageChange(data, valueKey = "value") {
-    return data.map((item, idx, arr) => {
-      if (idx === 0) {
-        return { ...item, change: null };
-      }
-      const prev = arr[idx - 1][valueKey];
-      const curr = item[valueKey];
-      const change = prev !== 0 ? (((curr - prev) / prev) * 100).toFixed(2) : null;
-      return { ...item, change: change !== null ? Number(change) : null };
-    });
+  return data.map((item, idx, arr) => {
+    if (idx === 0) {
+      return { ...item, change: null };
+    }
+    const prev = arr[idx - 1][valueKey];
+    const curr = item[valueKey];
+    const change =
+      prev !== 0 ? (((curr - prev) / prev) * 100).toFixed(2) : null;
+    return { ...item, change: change !== null ? Number(change) : null };
+  });
 }
 
 export const Dashboards = () => {
@@ -110,28 +111,33 @@ export const Dashboards = () => {
   const [modalContent, setModalContent] = useState({ title: "", chart: null });
   const navigate = useNavigate();
 
-  const gdpGrowthQuarterlyWithChange = addPercentageChange(gdpGrowthQuarterly, "growth_rate_percent");
+  const gdpGrowthQuarterlyWithChange = addPercentageChange(
+    gdpGrowthQuarterly,
+    "growth_rate_percent"
+  );
   const inflationWithChange = addPercentageChange(inflationRateData, "value");
   const unemployeData = addPercentageChange(unemploymentDataNew, "value");
   const workRemitances = addPercentageChange(workersRemittance, "amount");
   const rateExchangeData = addPercentageChange(currencyData, "USDtoPKR");
   const interestRate = addPercentageChange(interestDataNew, "rate");
-  
 
   // Get latest data for each metric
-  const latestGDPDataOld = gdpGrowthData.filter((item) => item.month === "June");
-  
-  const latestGDPData = gdpGrowthQuarterlyWithChange.filter((item) => item.year === 2025);
+  const latestGDPDataOld = gdpGrowthData.filter(
+    (item) => item.month === "June"
+  );
+
+  const latestGDPData = gdpGrowthQuarterlyWithChange.filter(
+    (item) => item.year === 2025
+  );
   const latestInflation = inflationWithChange[inflationData.length - 1];
   const latestUnemployment = unemployeData[unemploymentDataNew.length - 1];
-  
-  const latestCurrentAccount =
-    currentData[currentData.length - 1];
+
+  const latestCurrentAccount = currentData[currentData.length - 1];
   const latestExchange = foreignReserveData[foreignReserveData.length - 1];
   const latestRemittance = workRemitances[workersRemittance.length - 1];
-  
+
   const latestInterest = interestRate[interestData.length - 1];
-  
+
   // const latestKSE = kseData[kseData.length - 1];
 
   // let totalRemittance = remittanceData.reduce(
@@ -212,64 +218,41 @@ export const Dashboards = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
       {/* Modal for charts */}
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={modalContent.title}>
+      <Modal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        title={modalContent.title}
+      >
         {modalContent.chart}
       </Modal>
 
       {/* Profile Bar */}
-      <div className="bg-white shadow-sm border-b py-3">
-        <div className="w-full py-3 px-3">
+      <div className="bg-white shadow-sm border-b sm:py-1 md:py-2 lg:py-3">
+        <div className="w-full sm:py-1 md:py-2 lg:py-3 px-3">
           <div className="flex justify-between items-center">
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-green-500 to-green-700 bg-clip-text text-transparent">
+            <h1 className="text-sm sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-500 to-green-700 bg-clip-text text-transparent">
               Pakistan Economic Dashboard
             </h1>
             <div className="relative">
-              <button
-                onClick={() => setShowProfileMenu(!showProfileMenu)}
-                className="flex items-center gap-1 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
-              >
-                <div className="w-8 h-8 text-gray-600 rounded-full flex items-center justify-center font-semibold">
-                  A
-                </div>
-              </button>
-
-              {showProfileMenu && (
-                <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border z-50">
-                  <div className="p-4 border-b">
-                    <div className="font-semibold text-gray-800">Admin</div>
-                    <div className="text-sm text-gray-500">adminacruxtek@yopmail.com</div>
-                  </div>
-                  <div className="py-2">
-                    <button className="flex items-center gap-3 w-full px-4 py-2 text-left hover:bg-gray-50 text-gray-700">
-                      <User className="w-4 h-4" />
-                      Profile
-                    </button>
-                    <button className="flex items-center gap-3 w-full px-4 py-2 text-left hover:bg-gray-50 text-gray-700">
-                      <Settings className="w-4 h-4" />
-                      Settings
-                    </button>
-                    <button
-                      className="flex items-center gap-3 w-full px-4 py-2 text-left hover:bg-gray-50 text-gray-700"
-                      onClick={() => {
-                        localStorage.removeItem("isAuthenticated");
-                        navigate("/login");
-                      }}
-                    >
-                      <LogOut className="w-4 h-4" />
-                      Log out
-                    </button>
-                  </div>
-                </div>
-              )}
+              <div className="py-2">
+                <button
+                  className="flex items-center gap-3 w-full px-4 py-2 text-left hover:bg-gray-50 text-gray-700"
+                  onClick={() => {
+                    localStorage.removeItem("isAuthenticated");
+                    navigate("/login");
+                  }}
+                >
+                  <LogOut className="w-6 h-6" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="p-6" >
-
+      <div className="p-6">
         {/* KPI Cards Row 1 */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">      
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           {/* GDP Growth Rate Card - Smaller Version */}
           <div
             className="group bg-white p-4 rounded-lg shadow-md border border-gray-100 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
@@ -277,7 +260,7 @@ export const Dashboards = () => {
               openModal(
                 "GDP Growth Rate Trend (Quarterly)",
                 <ResponsiveContainer width="100%" height={250}>
-                  <BarChart 
+                  <BarChart
                     data={gdpQuarterlyChartData}
                     margin={{ top: 10, right: 15, bottom: 20, left: 15 }}
                   >
@@ -285,11 +268,20 @@ export const Dashboards = () => {
                     <XAxis
                       dataKey="label"
                       stroke="#666"
-                      label={{ value: "Quarter", position: "insideBottom", offset: -10 }}
+                      label={{
+                        value: "Quarter",
+                        position: "insideBottom",
+                        offset: -10,
+                      }}
                     />
                     <YAxis
                       stroke="#666"
-                      label={{ value: "Growth Rate (%)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }}
+                      label={{
+                        value: "Growth Rate (%)",
+                        angle: -90,
+                        position: "insideLeft",
+                        style: { textAnchor: "middle" },
+                      }}
                     />
                     <Tooltip />
                     <Bar
@@ -301,10 +293,14 @@ export const Dashboards = () => {
                       // dot={{ fill: "#3b82f6", strokeWidth: 1.5, r: 4 }}
                       // activeDot={{ r: 6, fill: "#1d4ed8" }}
                     >
-                      <LabelList 
-                        dataKey="growth" 
-                        position="top" 
-                        style={{ fontSize: "10px", fill: "#374151", fontWeight: "bold" }}
+                      <LabelList
+                        dataKey="growth"
+                        position="top"
+                        style={{
+                          fontSize: "10px",
+                          fill: "#374151",
+                          fontWeight: "bold",
+                        }}
                         formatter={(value) => `${value}%`}
                       />
                     </Bar>
@@ -335,12 +331,12 @@ export const Dashboards = () => {
             <div className="text-2xl font-bold text-gray-800 mb-1">
               {avgGDPGrowth.toFixed(1)}%
             </div>
-            <div className="text-xs font-medium mb-0.5">
-              June - 2025
-            </div>
+            <div className="text-xs font-medium mb-0.5">June - 2025</div>
             <div
               className={`text-xs font-medium ${
-                latestGDPData[0].change_vs_last_quarter >= 0 ? "text-green-600" : "text-red-600"
+                latestGDPData[0].change_vs_last_quarter >= 0
+                  ? "text-green-600"
+                  : "text-red-600"
               }`}
             >
               {latestGDPData[0].change_vs_last_quarter >= 0 ? "+" : ""}
@@ -355,16 +351,43 @@ export const Dashboards = () => {
               openModal(
                 "Inflation Rate Trend",
                 <ResponsiveContainer width="100%" height={250}>
-                  <BarChart data={inflationChartData} margin={{ top: 10, right: 15, bottom: 20, left: 10 }}>
+                  <BarChart
+                    data={inflationChartData}
+                    margin={{ top: 10, right: 15, bottom: 20, left: 10 }}
+                  >
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis dataKey="month" stroke="#666" label={{ value: "FY 2024-25", position: "insideBottom", offset: -10 }} />
-                    <YAxis stroke="#666" label={{ value: "Inflation Rate (%)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }} />
+                    <XAxis
+                      dataKey="month"
+                      stroke="#666"
+                      label={{
+                        value: "FY 2024-25",
+                        position: "insideBottom",
+                        offset: -10,
+                      }}
+                    />
+                    <YAxis
+                      stroke="#666"
+                      label={{
+                        value: "Inflation Rate (%)",
+                        angle: -90,
+                        position: "insideLeft",
+                        style: { textAnchor: "middle" },
+                      }}
+                    />
                     <Tooltip />
-                    <Bar dataKey="inflation" fill="#ef4444" radius={[3, 3, 0, 0]}>
-                    <LabelList 
-                        dataKey="inflation" 
-                        position="top" 
-                        style={{ fontSize: "10px", fill: "#374151", fontWeight: "bold" }}
+                    <Bar
+                      dataKey="inflation"
+                      fill="#ef4444"
+                      radius={[3, 3, 0, 0]}
+                    >
+                      <LabelList
+                        dataKey="inflation"
+                        position="top"
+                        style={{
+                          fontSize: "10px",
+                          fill: "#374151",
+                          fontWeight: "bold",
+                        }}
                         formatter={(value) => `${value}%`}
                       />
                     </Bar>
@@ -378,9 +401,15 @@ export const Dashboards = () => {
                 <div className="p-2 bg-red-100 rounded-md group-hover:bg-red-200 transition-colors">
                   <TrendingUp className="w-5 h-5 text-red-600" />
                 </div>
-                <span className="text-md font-semibold text-gray-700">Inflation Rate</span>
+                <span className="text-md font-semibold text-gray-700">
+                  Inflation Rate
+                </span>
               </div>
-              <div className={`p-1 rounded-full ${latestInflation.change >= 0 ? "bg-red-100" : "bg-green-100"}`}>
+              <div
+                className={`p-1 rounded-full ${
+                  latestInflation.change >= 0 ? "bg-red-100" : "bg-green-100"
+                }`}
+              >
                 {latestInflation.change >= 0 ? (
                   <TrendingUp className="w-3 h-3 text-red-600" />
                 ) : (
@@ -388,9 +417,17 @@ export const Dashboards = () => {
                 )}
               </div>
             </div>
-            <div className="text-2xl font-bold text-gray-800 mb-1">{latestInflation.value}%</div>
-            <div className="text-xs font-medium mb-0.5">{latestInflation.month} - {latestInflation.year}</div>
-            <div className={`text-xs font-medium ${latestInflation.change >= 0 ? "text-red-600" : "text-green-600"}`}>
+            <div className="text-2xl font-bold text-gray-800 mb-1">
+              {latestInflation.value}%
+            </div>
+            <div className="text-xs font-medium mb-0.5">
+              {latestInflation.month} - {latestInflation.year}
+            </div>
+            <div
+              className={`text-xs font-medium ${
+                latestInflation.change >= 0 ? "text-red-600" : "text-green-600"
+              }`}
+            >
               {latestInflation.change >= 0 ? "+" : ""}
               {latestInflation.change}% vs last month
             </div>
@@ -403,16 +440,39 @@ export const Dashboards = () => {
               openModal(
                 "Unemployment Rate Trend",
                 <ResponsiveContainer width="100%" height={250}>
-                  <BarChart data={unemploymentDataNew} margin={{ top: 10, right: 15, bottom: 20, left: 10 }}>
+                  <BarChart
+                    data={unemploymentDataNew}
+                    margin={{ top: 10, right: 15, bottom: 20, left: 10 }}
+                  >
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis dataKey="year" stroke="#666" label={{ value: "Year", position: "insideBottom", offset: -10 }} />
-                    <YAxis stroke="#666" label={{ value: "Unemployment Rate (%)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }} />
+                    <XAxis
+                      dataKey="year"
+                      stroke="#666"
+                      label={{
+                        value: "Year",
+                        position: "insideBottom",
+                        offset: -10,
+                      }}
+                    />
+                    <YAxis
+                      stroke="#666"
+                      label={{
+                        value: "Unemployment Rate (%)",
+                        angle: -90,
+                        position: "insideLeft",
+                        style: { textAnchor: "middle" },
+                      }}
+                    />
                     <Tooltip />
                     <Bar dataKey="value" fill="#f59e42">
-                      <LabelList 
-                        dataKey="value" 
-                        position="top" 
-                        style={{ fontSize: "10px", fill: "#374151", fontWeight: "bold" }}
+                      <LabelList
+                        dataKey="value"
+                        position="top"
+                        style={{
+                          fontSize: "10px",
+                          fill: "#374151",
+                          fontWeight: "bold",
+                        }}
                         formatter={(value) => `${value}%`}
                       />
                     </Bar>
@@ -426,9 +486,15 @@ export const Dashboards = () => {
                 <div className="p-2 bg-orange-100 rounded-md group-hover:bg-orange-200 transition-colors">
                   <Users className="w-5 h-5 text-orange-600" />
                 </div>
-                <span className="text-md font-semibold text-gray-700">Unemployment Rate</span>
+                <span className="text-md font-semibold text-gray-700">
+                  Unemployment Rate
+                </span>
               </div>
-              <div className={`p-1 rounded-full ${latestUnemployment.change >= 0 ? "bg-red-100" : "bg-green-100"}`}>
+              <div
+                className={`p-1 rounded-full ${
+                  latestUnemployment.change >= 0 ? "bg-red-100" : "bg-green-100"
+                }`}
+              >
                 {latestUnemployment.change >= 0 ? (
                   <TrendingUp className="w-3 h-3 text-red-600" />
                 ) : (
@@ -436,9 +502,19 @@ export const Dashboards = () => {
                 )}
               </div>
             </div>
-            <div className="text-2xl font-bold text-gray-800 mb-1">{latestUnemployment.value}%</div>
-            <div className="text-xs font-medium mb-0.5">FY - {latestUnemployment.year}</div>
-            <div className={`text-xs font-medium ${latestUnemployment.change >= 0 ? "text-red-600" : "text-green-600"}`}>
+            <div className="text-2xl font-bold text-gray-800 mb-1">
+              {latestUnemployment.value}%
+            </div>
+            <div className="text-xs font-medium mb-0.5">
+              FY - {latestUnemployment.year}
+            </div>
+            <div
+              className={`text-xs font-medium ${
+                latestUnemployment.change >= 0
+                  ? "text-red-600"
+                  : "text-green-600"
+              }`}
+            >
               {latestUnemployment.change >= 0 ? "+" : ""}
               {latestUnemployment.change}% vs last year
             </div>
@@ -451,10 +527,29 @@ export const Dashboards = () => {
               openModal(
                 "Workers Remittance Trend",
                 <ResponsiveContainer width="100%" height={250}>
-                  <LineChart data={remittanceChartData} margin={{ top: 10, right: 15, bottom: 20, left: 10 }}>
+                  <LineChart
+                    data={remittanceChartData}
+                    margin={{ top: 10, right: 15, bottom: 20, left: 10 }}
+                  >
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis dataKey="month" stroke="#666" label={{ value: "FY 2024-25", position: "insideBottom", offset: -10 }} />
-                    <YAxis stroke="#666" label={{ value: "Remittance (B USD)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }} />
+                    <XAxis
+                      dataKey="month"
+                      stroke="#666"
+                      label={{
+                        value: "FY 2024-25",
+                        position: "insideBottom",
+                        offset: -10,
+                      }}
+                    />
+                    <YAxis
+                      stroke="#666"
+                      label={{
+                        value: "Remittance (B USD)",
+                        angle: -90,
+                        position: "insideLeft",
+                        style: { textAnchor: "middle" },
+                      }}
+                    />
                     <Tooltip />
                     <Line
                       type="monotone"
@@ -464,10 +559,14 @@ export const Dashboards = () => {
                       dot={{ fill: "#10b981", strokeWidth: 1.5, r: 4 }}
                       activeDot={{ r: 6, fill: "#047857" }}
                     >
-                      <LabelList 
-                        dataKey="remittance" 
-                        position="top" 
-                        style={{ fontSize: "10px", fill: "#374151", fontWeight: "bold" }}
+                      <LabelList
+                        dataKey="remittance"
+                        position="top"
+                        style={{
+                          fontSize: "10px",
+                          fill: "#374151",
+                          fontWeight: "bold",
+                        }}
                         formatter={(value) => `${value}B`}
                       />
                     </Line>
@@ -481,9 +580,15 @@ export const Dashboards = () => {
                 <div className="p-2 bg-orange-100 rounded-md group-hover:bg-orange-200 transition-colors">
                   <Users className="w-5 h-5 text-orange-600" />
                 </div>
-                <span className="text-md font-semibold text-gray-700">Workers Remittance</span>
+                <span className="text-md font-semibold text-gray-700">
+                  Workers Remittance
+                </span>
               </div>
-              <div className={`p-1 rounded-full ${latestRemittance.change >= 0 ? "bg-red-100" : "bg-green-100"}`}>
+              <div
+                className={`p-1 rounded-full ${
+                  latestRemittance.change >= 0 ? "bg-red-100" : "bg-green-100"
+                }`}
+              >
                 {latestRemittance.change >= 0 ? (
                   <TrendingUp className="w-3 h-3 text-red-600" />
                 ) : (
@@ -491,11 +596,18 @@ export const Dashboards = () => {
                 )}
               </div>
             </div>
-            <div className="text-xl font-bold text-gray-800 mb-1">$38.29B <span className="text-xs font-medium">FY 2024-25</span></div>
-            <div className="text-xs font-bold mb-0.5">
-              ${latestRemittance.amount}B <span className="text-xs font-medium">June - 2025</span>
+            <div className="text-xl font-bold text-gray-800 mb-1">
+              $38.29B <span className="text-xs font-medium">FY 2024-25</span>
             </div>
-            <div className={`text-xs font-medium ${latestRemittance.change < 0 ? "text-red-600" : "text-green-600"}`}>
+            <div className="text-xs font-bold mb-0.5">
+              ${latestRemittance.amount}B{" "}
+              <span className="text-xs font-medium">June - 2025</span>
+            </div>
+            <div
+              className={`text-xs font-medium ${
+                latestRemittance.change < 0 ? "text-red-600" : "text-green-600"
+              }`}
+            >
               {latestRemittance.change >= 0 ? "+" : ""}
               {latestRemittance.change}% vs last month
             </div>
@@ -511,20 +623,46 @@ export const Dashboards = () => {
               openModal(
                 "Current Account Trend",
                 <ResponsiveContainer width="100%" height={250}>
-                  <BarChart data={currentData} margin={{ top: 10, right: 10, bottom: 20, left: 10 }}>
+                  <BarChart
+                    data={currentData}
+                    margin={{ top: 10, right: 10, bottom: 20, left: 10 }}
+                  >
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis dataKey="year" stroke="#666" label={{ value: "Year", position: "insideBottom", offset: -10 }} />
-                    <YAxis stroke="#666" label={{ value: "Balance (Billion USD)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }} />
+                    <XAxis
+                      dataKey="year"
+                      stroke="#666"
+                      label={{
+                        value: "Year",
+                        position: "insideBottom",
+                        offset: -10,
+                      }}
+                    />
+                    <YAxis
+                      stroke="#666"
+                      label={{
+                        value: "Balance (Billion USD)",
+                        angle: -90,
+                        position: "insideLeft",
+                        style: { textAnchor: "middle" },
+                      }}
+                    />
                     <Tooltip />
                     <ReferenceLine y={0} stroke="#000" />
                     <Bar dataKey="value">
                       {currentData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.value < 0 ? "#ef4444" : "#10b981"} />
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={entry.value < 0 ? "#ef4444" : "#10b981"}
+                        />
                       ))}
-                     <LabelList 
-                        dataKey="value" 
-                        position="top" 
-                        style={{ fontSize: "10px", fill: "#374151", fontWeight: "bold" }}
+                      <LabelList
+                        dataKey="value"
+                        position="top"
+                        style={{
+                          fontSize: "10px",
+                          fill: "#374151",
+                          fontWeight: "bold",
+                        }}
                         formatter={(value) => `${value}B`}
                       />
                     </Bar>
@@ -538,9 +676,17 @@ export const Dashboards = () => {
                 <div className="p-2 bg-green-100 rounded-md group-hover:bg-green-200 transition-colors">
                   <DollarSign className="w-5 h-5 text-green-600" />
                 </div>
-                <span className="text-md font-semibold text-gray-700">Current Account</span>
+                <span className="text-md font-semibold text-gray-700">
+                  Current Account
+                </span>
               </div>
-              <div className={`p-1 rounded-full ${latestCurrentAccount.change >= 0 ? "bg-green-100" : "bg-red-100"}`}>
+              <div
+                className={`p-1 rounded-full ${
+                  latestCurrentAccount.change >= 0
+                    ? "bg-green-100"
+                    : "bg-red-100"
+                }`}
+              >
                 {latestCurrentAccount.change >= 0 ? (
                   <TrendingUp className="w-3 h-3 text-green-600" />
                 ) : (
@@ -554,7 +700,9 @@ export const Dashboards = () => {
               <span className="text-sm">B USD</span>
             </div>
             <div className="text-xs font-medium mb-0.5">FY - 2025</div>
-            <div className="text-[10px] text-gray-500 mt-0.5">Balance of payments</div>
+            <div className="text-[10px] text-gray-500 mt-0.5">
+              Balance of payments
+            </div>
           </div>
 
           {/* Foreign Reserves Card - Smaller Version */}
@@ -564,10 +712,29 @@ export const Dashboards = () => {
               openModal(
                 "Foreign Reserves Trend",
                 <ResponsiveContainer width="100%" height={250}>
-                  <LineChart data={foreignReserveData} margin={{ top: 10, right: 15, bottom: 20, left: 10 }}>
+                  <LineChart
+                    data={foreignReserveData}
+                    margin={{ top: 10, right: 15, bottom: 20, left: 10 }}
+                  >
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis dataKey="month" stroke="#666" label={{ value: "FY 2024-25", position: "insideBottom", offset: -10 }} />
-                    <YAxis stroke="#666" label={{ value: "Reserves (B USD)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }} />
+                    <XAxis
+                      dataKey="month"
+                      stroke="#666"
+                      label={{
+                        value: "FY 2024-25",
+                        position: "insideBottom",
+                        offset: -10,
+                      }}
+                    />
+                    <YAxis
+                      stroke="#666"
+                      label={{
+                        value: "Reserves (B USD)",
+                        angle: -90,
+                        position: "insideLeft",
+                        style: { textAnchor: "middle" },
+                      }}
+                    />
                     <Tooltip />
                     <Line
                       type="monotone"
@@ -577,10 +744,14 @@ export const Dashboards = () => {
                       dot={{ fill: "#3b82f6", strokeWidth: 1.5, r: 4 }}
                       activeDot={{ r: 6, fill: "#1d4ed8" }}
                     >
-                      <LabelList 
-                        dataKey="totalReserves" 
-                        position="top" 
-                        style={{ fontSize: "10px", fill: "#374151", fontWeight: "bold" }}
+                      <LabelList
+                        dataKey="totalReserves"
+                        position="top"
+                        style={{
+                          fontSize: "10px",
+                          fill: "#374151",
+                          fontWeight: "bold",
+                        }}
                         formatter={(value) => `${value}B`}
                       />
                     </Line>
@@ -594,9 +765,15 @@ export const Dashboards = () => {
                 <div className="p-2 bg-blue-100 rounded-md group-hover:bg-blue-200 transition-colors">
                   <BarChart3 className="w-5 h-5 text-blue-600" />
                 </div>
-                <span className="text-md font-semibold text-gray-700">Foreign Reserves</span>
+                <span className="text-md font-semibold text-gray-700">
+                  Foreign Reserves
+                </span>
               </div>
-              <div className={`p-1 rounded-full ${latestExchange.change >= 0 ? "bg-green-100" : "bg-red-100"}`}>
+              <div
+                className={`p-1 rounded-full ${
+                  latestExchange.change >= 0 ? "bg-green-100" : "bg-red-100"
+                }`}
+              >
                 {latestExchange.change >= 0 ? (
                   <TrendingUp className="w-3 h-3 text-green-600" />
                 ) : (
@@ -609,7 +786,11 @@ export const Dashboards = () => {
               <span className="text-sm">B USD</span>
             </div>
             <div className="text-xs font-medium mb-0.5">June - 2025</div>
-            <div className={`text-xs font-medium ${latestExchange.change >= 0 ? "text-green-600" : "text-red-600"}`}>
+            <div
+              className={`text-xs font-medium ${
+                latestExchange.change >= 0 ? "text-green-600" : "text-red-600"
+              }`}
+            >
               {latestExchange.change >= 0 ? "+" : ""}
               {latestExchange.change}B vs last month
             </div>
@@ -627,9 +808,15 @@ export const Dashboards = () => {
                 <div className="p-2 bg-purple-100 rounded-md group-hover:bg-purple-200 transition-colors">
                   <DollarSign className="w-5 h-5 text-purple-600" />
                 </div>
-                <span className="text-md font-semibold text-gray-700">Exchange Rate</span>
+                <span className="text-md font-semibold text-gray-700">
+                  Exchange Rate
+                </span>
               </div>
-              <div className={`p-1 rounded-full ${exchangeRate.change >= 0 ? "bg-red-100" : "bg-green-100"}`}>
+              <div
+                className={`p-1 rounded-full ${
+                  exchangeRate.change >= 0 ? "bg-red-100" : "bg-green-100"
+                }`}
+              >
                 {exchangeRate.change >= 0 ? (
                   <TrendingUp className="w-3 h-3 text-red-600" />
                 ) : (
@@ -638,10 +825,15 @@ export const Dashboards = () => {
               </div>
             </div>
             <div className="text-2xl font-bold text-gray-800 mb-1">
-              {exchangeRate.USDtoPKR.toFixed(2)} <span className="text-sm">PKR/USD</span>
+              {exchangeRate.USDtoPKR.toFixed(2)}{" "}
+              <span className="text-sm">PKR/USD</span>
             </div>
-            <div className="text-xs font-medium mb-0.5">{exchangeRate.date}</div>
-            <div className="text-xs font-medium text-red-600">+0.47% vs 31-May-2025</div>
+            <div className="text-xs font-medium mb-0.5">
+              {exchangeRate.date}
+            </div>
+            <div className="text-xs font-medium text-red-600">
+              +0.47% vs 31-May-2025
+            </div>
           </div>
 
           {/* Interest Rate Card - Smaller Version */}
@@ -651,10 +843,29 @@ export const Dashboards = () => {
               openModal(
                 "Interest Rate Trend",
                 <ResponsiveContainer width="100%" height={250}>
-                  <LineChart data={interestDataNew} margin={{ top: 10, right: 10, bottom: 20, left: 10 }}>
+                  <LineChart
+                    data={interestDataNew}
+                    margin={{ top: 10, right: 10, bottom: 20, left: 10 }}
+                  >
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis dataKey="month" stroke="#666" label={{ value: "FY 2024-25", position: "insideBottom", offset: -10 }} />
-                    <YAxis stroke="#666" label={{ value: "Interest Rate (%)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }} />
+                    <XAxis
+                      dataKey="month"
+                      stroke="#666"
+                      label={{
+                        value: "FY 2024-25",
+                        position: "insideBottom",
+                        offset: -10,
+                      }}
+                    />
+                    <YAxis
+                      stroke="#666"
+                      label={{
+                        value: "Interest Rate (%)",
+                        angle: -90,
+                        position: "insideLeft",
+                        style: { textAnchor: "middle" },
+                      }}
+                    />
                     <Tooltip />
                     <Line
                       type="monotone"
@@ -664,10 +875,14 @@ export const Dashboards = () => {
                       dot={{ fill: "#f59e42", strokeWidth: 1.5, r: 4 }}
                       activeDot={{ r: 6, fill: "#ea580c" }}
                     >
-                      <LabelList 
-                        dataKey="rate" 
-                        position="top" 
-                        style={{ fontSize: "10px", fill: "#374151", fontWeight: "bold" }}
+                      <LabelList
+                        dataKey="rate"
+                        position="top"
+                        style={{
+                          fontSize: "10px",
+                          fill: "#374151",
+                          fontWeight: "bold",
+                        }}
                         formatter={(value) => `${value}%`}
                       />
                     </Line>
@@ -681,9 +896,15 @@ export const Dashboards = () => {
                 <div className="p-2 bg-orange-100 rounded-md group-hover:bg-orange-200 transition-colors">
                   <Users className="w-5 h-5 text-orange-600" />
                 </div>
-                <span className="text-md font-semibold text-gray-700">Interest Rate</span>
+                <span className="text-md font-semibold text-gray-700">
+                  Interest Rate
+                </span>
               </div>
-              <div className={`p-1 rounded-full ${latestInterest.change >= 0 ? "bg-red-100" : "bg-green-100"}`}>
+              <div
+                className={`p-1 rounded-full ${
+                  latestInterest.change >= 0 ? "bg-red-100" : "bg-green-100"
+                }`}
+              >
                 {latestInterest.change > 0 ? (
                   <TrendingUp className="w-3 h-3 text-red-600" />
                 ) : (
@@ -691,9 +912,15 @@ export const Dashboards = () => {
                 )}
               </div>
             </div>
-            <div className="text-2xl font-bold text-gray-800 mb-1">{latestInterest.rate}%</div>
+            <div className="text-2xl font-bold text-gray-800 mb-1">
+              {latestInterest.rate}%
+            </div>
             <div className="text-xs font-medium mb-0.5">June - 2025</div>
-            <div className={`text-xs font-medium ${latestInterest.change >= 0 ? "text-red-600" : "text-green-600"}`}>
+            <div
+              className={`text-xs font-medium ${
+                latestInterest.change >= 0 ? "text-red-600" : "text-green-600"
+              }`}
+            >
               {latestInterest.change >= 0 ? "+" : ""}
               {latestInterest.change}% vs last month
             </div>
@@ -709,16 +936,39 @@ export const Dashboards = () => {
               openModal(
                 "Export of Goods Trend",
                 <ResponsiveContainer width="100%" height={350}>
-                  <BarChart data={exportGoods} margin={{ top: 20, right: 20, bottom: 30, left: 20 }}>
+                  <BarChart
+                    data={exportGoods}
+                    margin={{ top: 20, right: 20, bottom: 30, left: 20 }}
+                  >
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis dataKey="month" stroke="#666" label={{ value: "FY 2024-25", position: "insideBottom", offset: -15 }} />
-                    <YAxis stroke="#666" label={{ value: "Value (Billion USD)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }} />
+                    <XAxis
+                      dataKey="month"
+                      stroke="#666"
+                      label={{
+                        value: "FY 2024-25",
+                        position: "insideBottom",
+                        offset: -15,
+                      }}
+                    />
+                    <YAxis
+                      stroke="#666"
+                      label={{
+                        value: "Value (Billion USD)",
+                        angle: -90,
+                        position: "insideLeft",
+                        style: { textAnchor: "middle" },
+                      }}
+                    />
                     <Tooltip />
                     <Bar dataKey="value" fill="#10b981" radius={[4, 4, 0, 0]}>
-                      <LabelList 
-                        dataKey="value" 
-                        position="top" 
-                        style={{ fontSize: "10px", fill: "#374151", fontWeight: "bold" }}
+                      <LabelList
+                        dataKey="value"
+                        position="top"
+                        style={{
+                          fontSize: "10px",
+                          fill: "#374151",
+                          fontWeight: "bold",
+                        }}
                         formatter={(value) => `${value}B`}
                       />
                     </Bar>
@@ -732,13 +982,21 @@ export const Dashboards = () => {
                 <div className="p-2 bg-green-100 rounded-lg group-hover:bg-green-200 transition-colors">
                   <Download className="w-5 h-5 text-green-600" />
                 </div>
-                <span className="text-md font-semibold text-gray-700">Export of Goods</span>
+                <span className="text-md font-semibold text-gray-700">
+                  Export of Goods
+                </span>
               </div>
             </div>
             <div className="text-2xl font-bold text-gray-800 mt-4 mb-1">
-              ${exportGoods.reduce((acc, curr) => acc + curr.value, 0).toLocaleString()}B
+              $
+              {exportGoods
+                .reduce((acc, curr) => acc + curr.value, 0)
+                .toLocaleString()}
+              B
             </div>
-            <div className="text-xs font-medium text-gray-600 mb-2">FY 2024-25</div>
+            <div className="text-xs font-medium text-gray-600 mb-2">
+              FY 2024-25
+            </div>
           </div>
 
           {/* Import Goods - Smaller Version */}
@@ -748,16 +1006,39 @@ export const Dashboards = () => {
               openModal(
                 "Import of Goods Trend",
                 <ResponsiveContainer width="100%" height={350}>
-                  <BarChart data={importGoods} margin={{ top: 20, right: 20, bottom: 30, left: 20 }}>
+                  <BarChart
+                    data={importGoods}
+                    margin={{ top: 20, right: 20, bottom: 30, left: 20 }}
+                  >
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis dataKey="month" stroke="#666" label={{ value: "FY 2024-25", position: "insideBottom", offset: -15 }} />
-                    <YAxis stroke="#666" label={{ value: "Value (Billion USD)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }} />
+                    <XAxis
+                      dataKey="month"
+                      stroke="#666"
+                      label={{
+                        value: "FY 2024-25",
+                        position: "insideBottom",
+                        offset: -15,
+                      }}
+                    />
+                    <YAxis
+                      stroke="#666"
+                      label={{
+                        value: "Value (Billion USD)",
+                        angle: -90,
+                        position: "insideLeft",
+                        style: { textAnchor: "middle" },
+                      }}
+                    />
                     <Tooltip />
-                    <Bar dataKey="value" fill="#ef4444" radius={[4, 4, 0, 0]}> 
-                      <LabelList 
-                        dataKey="value" 
-                        position="top" 
-                        style={{ fontSize: "10px", fill: "#374151", fontWeight: "bold" }}
+                    <Bar dataKey="value" fill="#ef4444" radius={[4, 4, 0, 0]}>
+                      <LabelList
+                        dataKey="value"
+                        position="top"
+                        style={{
+                          fontSize: "10px",
+                          fill: "#374151",
+                          fontWeight: "bold",
+                        }}
                         formatter={(value) => `${value}B`}
                       />
                     </Bar>
@@ -771,13 +1052,21 @@ export const Dashboards = () => {
                 <div className="p-2 bg-red-100 rounded-lg group-hover:bg-red-200 transition-colors">
                   <Download className="w-5 h-5 text-red-600 rotate-180" />
                 </div>
-                <span className="text-md font-semibold text-gray-700">Import of Goods</span>
+                <span className="text-md font-semibold text-gray-700">
+                  Import of Goods
+                </span>
               </div>
             </div>
             <div className="text-2xl font-bold text-gray-800 mt-4 mb-1">
-              ${importGoods.reduce((acc, curr) => acc + curr.value, 0).toLocaleString()}B
+              $
+              {importGoods
+                .reduce((acc, curr) => acc + curr.value, 0)
+                .toLocaleString()}
+              B
             </div>
-            <div className="text-xs font-medium text-gray-600 mb-2">FY 2024-25</div>
+            <div className="text-xs font-medium text-gray-600 mb-2">
+              FY 2024-25
+            </div>
           </div>
 
           {/* Export Services - Smaller Version */}
@@ -787,16 +1076,39 @@ export const Dashboards = () => {
               openModal(
                 "Export of Services Trend",
                 <ResponsiveContainer width="100%" height={350}>
-                  <BarChart data={exportServices} margin={{ top: 20, right: 20, bottom: 30, left: 20 }}>
+                  <BarChart
+                    data={exportServices}
+                    margin={{ top: 20, right: 20, bottom: 30, left: 20 }}
+                  >
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis dataKey="month" stroke="#666" label={{ value: "FY 2024-25", position: "insideBottom", offset: -15 }} />
-                    <YAxis stroke="#666" label={{ value: "Value (Million USD)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }} />
+                    <XAxis
+                      dataKey="month"
+                      stroke="#666"
+                      label={{
+                        value: "FY 2024-25",
+                        position: "insideBottom",
+                        offset: -15,
+                      }}
+                    />
+                    <YAxis
+                      stroke="#666"
+                      label={{
+                        value: "Value (Million USD)",
+                        angle: -90,
+                        position: "insideLeft",
+                        style: { textAnchor: "middle" },
+                      }}
+                    />
                     <Tooltip />
-                    <Bar dataKey="value" fill="#3b82f6" radius={[4, 4, 0, 0]} > 
-                      <LabelList 
-                        dataKey="value" 
-                        position="top" 
-                        style={{ fontSize: "10px", fill: "#374151", fontWeight: "bold" }}
+                    <Bar dataKey="value" fill="#3b82f6" radius={[4, 4, 0, 0]}>
+                      <LabelList
+                        dataKey="value"
+                        position="top"
+                        style={{
+                          fontSize: "10px",
+                          fill: "#374151",
+                          fontWeight: "bold",
+                        }}
                         formatter={(value) => `${value}M`}
                       />
                     </Bar>
@@ -810,13 +1122,21 @@ export const Dashboards = () => {
                 <div className="p-2 bg-blue-100 rounded-lg group-hover:bg-blue-200 transition-colors">
                   <Download className="w-5 h-5 text-blue-600" />
                 </div>
-                <span className="text-md font-semibold text-gray-700">Export of Services</span>
+                <span className="text-md font-semibold text-gray-700">
+                  Export of Services
+                </span>
               </div>
             </div>
             <div className="text-2xl font-bold text-gray-800 mt-4 mb-1">
-              ${(exportServices.reduce((acc, curr) => acc + curr.value, 0) / 1000).toFixed(2)}B
+              $
+              {(
+                exportServices.reduce((acc, curr) => acc + curr.value, 0) / 1000
+              ).toFixed(2)}
+              B
             </div>
-            <div className="text-xs font-medium text-gray-600 mb-2">FY 2024-25</div>
+            <div className="text-xs font-medium text-gray-600 mb-2">
+              FY 2024-25
+            </div>
           </div>
 
           {/* Import Services - Smaller Version */}
@@ -826,16 +1146,39 @@ export const Dashboards = () => {
               openModal(
                 "Import of Services Trend",
                 <ResponsiveContainer width="100%" height={350}>
-                  <BarChart data={importServices} margin={{ top: 20, right: 20, bottom: 30, left: 20 }}>
+                  <BarChart
+                    data={importServices}
+                    margin={{ top: 20, right: 20, bottom: 30, left: 20 }}
+                  >
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                    <XAxis dataKey="month" stroke="#666" label={{ value: "FY 2024-25", position: "insideBottom", offset: -15 }} />
-                    <YAxis stroke="#666" label={{ value: "Value (Million USD)", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }} />
+                    <XAxis
+                      dataKey="month"
+                      stroke="#666"
+                      label={{
+                        value: "FY 2024-25",
+                        position: "insideBottom",
+                        offset: -15,
+                      }}
+                    />
+                    <YAxis
+                      stroke="#666"
+                      label={{
+                        value: "Value (Million USD)",
+                        angle: -90,
+                        position: "insideLeft",
+                        style: { textAnchor: "middle" },
+                      }}
+                    />
                     <Tooltip />
-                    <Bar dataKey="value" fill="#a855f7" radius={[4, 4, 0, 0]} > 
-                      <LabelList 
-                        dataKey="value" 
-                        position="top" 
-                        style={{ fontSize: "10px", fill: "#374151", fontWeight: "bold" }}
+                    <Bar dataKey="value" fill="#a855f7" radius={[4, 4, 0, 0]}>
+                      <LabelList
+                        dataKey="value"
+                        position="top"
+                        style={{
+                          fontSize: "10px",
+                          fill: "#374151",
+                          fontWeight: "bold",
+                        }}
                         formatter={(value) => `${value}M`}
                       />
                     </Bar>
@@ -849,13 +1192,21 @@ export const Dashboards = () => {
                 <div className="p-2 bg-purple-100 rounded-lg group-hover:bg-purple-200 transition-colors">
                   <Download className="w-5 h-5 text-purple-600 rotate-180" />
                 </div>
-                <span className="text-md font-semibold text-gray-700">Import of Services</span>
+                <span className="text-md font-semibold text-gray-700">
+                  Import of Services
+                </span>
               </div>
             </div>
             <div className="text-2xl font-bold text-gray-800 mt-4 mb-1">
-              ${(importServices.reduce((acc, curr) => acc + curr.value, 0) / 1000).toFixed(2)}B
+              $
+              {(
+                importServices.reduce((acc, curr) => acc + curr.value, 0) / 1000
+              ).toFixed(2)}
+              B
             </div>
-            <div className="text-xs font-medium text-gray-600 mb-2">FY 2024-25</div>
+            <div className="text-xs font-medium text-gray-600 mb-2">
+              FY 2024-25
+            </div>
           </div>
         </div>
 
@@ -1042,7 +1393,7 @@ export const Dashboards = () => {
               <LineChart data={gdpQuarterlyChartData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                 <XAxis dataKey="label" stroke="#666" />
-                <YAxis stroke="#666" tickFormatter={(value) => `${value}%`}/>
+                <YAxis stroke="#666" tickFormatter={(value) => `${value}%`} />
                 <Tooltip
                   contentStyle={{
                     backgroundColor: "#f8f9fa",
@@ -1073,8 +1424,8 @@ export const Dashboards = () => {
             <ResponsiveContainer width="100%" height={280}>
               <BarChart data={inflationChartData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis dataKey="month" stroke="#666"/>
-                <YAxis stroke="#666" tickFormatter={(value) => `${value}%`}/>
+                <XAxis dataKey="month" stroke="#666" />
+                <YAxis stroke="#666" tickFormatter={(value) => `${value}%`} />
                 <Tooltip
                   contentStyle={{
                     backgroundColor: "#f8f9fa",
@@ -1165,7 +1516,6 @@ export const Dashboards = () => {
             </ResponsiveContainer>
           </div>
         </div>
-
       </div>
     </div>
   );
@@ -1174,9 +1524,7 @@ export const Dashboards = () => {
 function KseIndexAreaChart({ kseIndexData }) {
   return (
     <div className="bg-white p-4 rounded-xl shadow-md w-full">
-      <h2 className="text-lg font-semibold mb-4">
-        KSE-100 Index Trend (2025)
-      </h2>
+      <h2 className="text-lg font-semibold mb-4">KSE-100 Index Trend (2025)</h2>
       <ResponsiveContainer width="100%" height={300}>
         <AreaChart
           data={kseIndexData}

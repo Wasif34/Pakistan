@@ -33,8 +33,8 @@ const Login = () => {
   // Render page with image taking half the screen and form on the other half
 
   return (
-    <div className="flex flex-col md:flex-row h-screen">
-      <div className="w-full md:w-1/2 bg-gray-100 flex items-center justify-center h-64 md:h-auto">
+    <div className="flex bg-white flex-col md:flex-row h-screen">
+      <div className="hidden md:flex w-full md:w-1/2 bg-white items-center justify-center h-64 md:h-auto">
         {/* Image is href */}
         <img
           src={TA_Login_Img}
@@ -42,7 +42,7 @@ const Login = () => {
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="w-full md:w-1/2 flex flex-col items-center justify-center bg-white py-8 md:py-0">
+      <div className="w-full md:w-1/2 flex flex-col items-center justify-center min-h-screen md:min-h-0 bg-white md:py-0">
         <img
           src="https://tdas-stage.acruxtek.net/assets/imgs/TDAS%20Logo%20new.png"
           alt="Login Illustration"

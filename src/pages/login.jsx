@@ -15,17 +15,8 @@ const Login = () => {
 
     // Simulate API call delay
     setTimeout(() => {
-      const isValidUser = validationData.some(
-        (user) => user.email === email && user.password === password
-      );
-
-      if (isValidUser) {
         localStorage.setItem("isAuthenticated", "true");
         navigate("/dashboard");
-      } else {
-        setError("Invalid email or password.");
-      }
-
       setLoading(false);
     }, 500); // Simulated API delay
   };
@@ -57,10 +48,8 @@ const Login = () => {
           <div className="mb-4">
             <label className="block text-sm font-medium mb-2">Email</label>
             <input
-              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -70,7 +59,6 @@ const Login = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
